@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Warmup Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #8892b0;
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #4facfe;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 .icon {
+            font-size: 1.2rem;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(79, 172, 254, 0.2);
+            border-radius: 6px;
+        }
+
+        /* Add Profile Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a8b2d1;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .form-group input::placeholder {
+            color: #5a6a8a;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: #1a1a2e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            color: #1a1a2e;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(90deg, #eb3349, #f45c43);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(235, 51, 73, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* Profile List */
+        .profile-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .profile-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-item.running {
+            border: 2px solid #38ef7d;
+            animation: pulse 2s infinite;
+        }
+
+        .profile-item.completed {
+            border: 2px solid #38ef7d;
+            opacity: 0.7;
+        }
+
+        .profile-item.failed {
+            border: 2px solid #eb3349;
+            opacity: 0.7;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(56, 239, 125, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(56, 239, 125, 0); }
+        }
+
+        .profile-checkbox {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #4facfe;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-path {
+            font-size: 0.8rem;
+            color: #8892b0;
+            word-break: break-all;
+        }
+
+        .profile-delete {
+            background: none;
+            border: none;
+            color: #eb3349;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .profile-delete:hover {
+            opacity: 1;
+        }
+
+        .profile-status {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+        .status-running {
+            background: rgba(56, 239, 125, 0.2);
+            color: #38ef7d;
+        }
+
+        .status-completed {
+            background: rgba(56, 239, 125, 0.2);
+            color: #38ef7d;
+        }
+
+        .status-failed {
+            background: rgba(235, 51, 73, 0.2);
+            color: #eb3349;
+        }
+
+        /* Control Buttons */
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .controls .btn {
+            flex: 1;
+        }
+
+        /* Status Panel */
+        .status-panel {
+            margin-top: 20px;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #5a6a8a;
+        }
+
+        .status-dot.running {
+            background: #38ef7d;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .current-task {
+            background: rgba(79, 172, 254, 0.1);
+            border-left: 3px solid #4facfe;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+        }
+
+        .current-task h4 {
+            color: #4facfe;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .current-task p {
+            font-size: 1.1rem;
+        }
+
+        /* Log Console */
+        .log-console {
+            background: #0a0a0f;
+            border-radius: 10px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+        }
+
+        .log-entry {
+            padding: 3px 0;
+            color: #8892b0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-entry.success {
+            color: #38ef7d;
+        }
+
+        .log-entry.error {
+            color: #eb3349;
+        }
+
+        .log-entry.info {
+            color: #4facfe;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6a8a;
+        }
+
+        .empty-state .icon-large {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Select All */
+        .select-all {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(79, 172, 254, 0.1);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .select-all label {
+            cursor: pointer;
+            color: #4facfe;
+        }
+
+        /* Task List */
+        .task-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .task-item {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-item .task-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .task-item.pending { color: #5a6a8a; }
+        .task-item.running { color: #4facfe; }
+        .task-item.completed { color: #38ef7d; }
+        .task-item.failed { color: #eb3349; }
+
+        /* Logs Header */
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logs-header h2 {
+            margin-bottom: 0;
+        }
+
+        .logs-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #a8b2d1;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-small:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #4facfe;
+            color: #4facfe;
+        }
+
+        .copy-notification {
+            display: none;
+            padding: 10px 15px;
+            background: rgba(56, 239, 125, 0.2);
+            border: 1px solid #38ef7d;
+            border-radius: 8px;
+            color: #38ef7d;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .copy-notification.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Make log console selectable */
+        .log-console {
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #5a6a8a;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Facebook Warmup Bot</h1>
+            <p>Manage multiple Edge profiles and run warmup tasks sequentially</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Left Column: Profile Management -->
+            <div>
+                <!-- Add Profile Card -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <h2><span class="icon">+</span> Add New Profile</h2>
+                    <form id="addProfileForm">
+                        <div class="form-group">
+                            <label>Profile Name</label>
+                            <input type="text" id="profileName" placeholder="e.g., Account 1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Edge Profile Path</label>
+                            <input type="text" id="profilePath" placeholder="C:\Users\ABC\AppData\Local\Microsoft\Edge\User Data" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Add Profile</button>
+                    </form>
+                </div>
+
+                <!-- Profiles List Card -->
+                <div class="card">
+                    <h2><span class="icon">&#9776;</span> Profiles</h2>
+                    
+                    <div class="select-all">
+                        <input type="checkbox" id="selectAll" class="profile-checkbox">
+                        <label for="selectAll">Select All Profiles</label>
+                    </div>
+
+                    <div class="profile-list" id="profileList">
+                        <div class="empty-state">
+                            <span class="icon-large">[ ]</span>
+                            <p>No profiles added yet.<br>Add your first profile above.</p>
+                        </div>
+                    </div>
+
+                    <div class="controls">
+                        <button class="btn btn-success" id="runBtn" onclick="runBot()">
+                            &#9654; Run Selected
+                        </button>
+                        <button class="btn btn-danger" id="stopBtn" onclick="stopBot()" disabled>
+                            &#9632; Stop
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Status & Logs -->
+            <div>
+                <!-- Status Card -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <h2><span class="icon">&#9881;</span> Status</h2>
+                    
+                    <div class="status-header">
+                        <div class="status-indicator">
+                            <div class="status-dot" id="statusDot"></div>
+                            <span id="statusText">Idle</span>
+                        </div>
+                    </div>
+
+                    <div class="current-task" id="currentTaskPanel" style="display: none;">
+                        <h4>Current Task</h4>
+                        <p id="currentTask">-</p>
+                    </div>
+
+                    <div id="taskProgress">
+                        <h4 style="color: #a8b2d1; margin-bottom: 10px; font-size: 0.9rem;">Tasks</h4>
+                        <div class="task-list">
+                            <div class="task-item pending" data-task="browser"><span class="task-icon">&#9635;</span> Browser</div>
+                            <div class="task-item pending" data-task="login"><span class="task-icon">&#9919;</span> Login</div>
+                            <div class="task-item pending" data-task="feed"><span class="task-icon">&#9783;</span> Feed</div>
+                            <div class="task-item pending" data-task="profile"><span class="task-icon">&#9787;</span> Visit Profile</div>
+                            <div class="task-item pending" data-task="story"><span class="task-icon">&#9734;</span> Story</div>
+                            <div class="task-item pending" data-task="like"><span class="task-icon">&#9829;</span> Like</div>
+                            <div class="task-item pending" data-task="comment"><span class="task-icon">&#9998;</span> Comment</div>
+                            <div class="task-item pending" data-task="post"><span class="task-icon">&#9633;</span> Image Post</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logs Card -->
+                <div class="card">
+                    <div class="logs-header">
+                        <h2><span class="icon">&#9776;</span> Logs</h2>
+                        <div class="logs-actions">
+                            <button class="btn-small" onclick="copyLogs()" title="Copy Logs">
+                                Copy
+                            </button>
+                            <button class="btn-small" onclick="clearLogs()" title="Clear Logs">
+                                Clear
+                            </button>
+                            <button class="btn-small" onclick="downloadLogs()" title="Download Logs">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="log-console" id="logConsole">
+                        <div class="log-entry info">Ready to start...</div>
+                    </div>
+                    <div class="copy-notification" id="copyNotification">
+                        Logs copied to clipboard!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Facebook Warmup Bot v3.0 | Dashboard: Chrome | Automation: Edge</p>
+        </footer>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let statusInterval = null;
+
+        // Load profiles on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfiles();
+            startStatusPolling();
+        });
+
+        // Add Profile Form
+        document.getElementById('addProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('profileName').value.trim();
+            const path = document.getElementById('profilePath').value.trim();
+            
+            if (!name || !path) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/profiles`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, path })
+                });
+
+                if (response.ok) {
+                    document.getElementById('profileName').value = '';
+                    document.getElementById('profilePath').value = '';
+                    loadProfiles();
+                    addLog(`Profile "${name}" added successfully`, 'success');
+                } else {
+                    const data = await response.json();
+                    alert(data.error || 'Failed to add profile');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to connect to server');
+            }
+        });
+
+        // Load Profiles
+        async function loadProfiles() {
+            try {
+                const response = await fetch(`${API_URL}/profiles`);
+                const profiles = await response.json();
+                renderProfiles(profiles);
+            } catch (error) {
+                console.error('Error loading profiles:', error);
+            }
+        }
+
+        // Render Profiles
+        function renderProfiles(profiles) {
+            const container = document.getElementById('profileList');
+            
+            if (profiles.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span class="icon-large">[ ]</span>
+                        <p>No profiles added yet.<br>Add your first profile above.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = profiles.map(profile => `
+                <div class="profile-item" id="profile-${profile.id}" data-name="${profile.name}">
+                    <input type="checkbox" class="profile-checkbox" value="${profile.name}">
+                    <div class="profile-info">
+                        <div class="profile-name">${profile.name}</div>
+                        <div class="profile-path">${profile.path}</div>
+                    </div>
+                    <button class="profile-delete" onclick="deleteProfile(${profile.id}, '${profile.name}')" title="Delete">X</button>
+                </div>
+            `).join('');
+
+            // Update select all checkbox
+            updateSelectAll();
+        }
+
+        // Delete Profile
+        async function deleteProfile(id, name) {
+            if (!confirm(`Delete profile "${name}"?`)) return;
+
+            try {
+                await fetch(`${API_URL}/profiles/${id}`, { method: 'DELETE' });
+                loadProfiles();
+                addLog(`Profile "${name}" deleted`, 'info');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Select All Checkbox
+        document.getElementById('selectAll').addEventListener('change', (e) => {
+            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
+            checkboxes.forEach(cb => cb.checked = e.target.checked);
+        });
+
+        function updateSelectAll() {
+            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
+            const selectAll = document.getElementById('selectAll');
+            
+            if (checkboxes.length === 0) {
+                selectAll.checked = false;
+                return;
+            }
+            
+            selectAll.checked = Array.from(checkboxes).every(cb => cb.checked);
+        }
+
+        // Add change listener to profile checkboxes
+        document.getElementById('profileList').addEventListener('change', (e) => {
+            if (e.target.classList.contains('profile-checkbox')) {
+                updateSelectAll();
+            }
+        });
+
+        // Run Bot
+        async function runBot() {
+            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox:checked');
+            const selectedProfiles = Array.from(checkboxes).map(cb => cb.value);
+
+            if (selectedProfiles.length === 0) {
+                alert('Please select at least one profile');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ profiles: selectedProfiles })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('runBtn').disabled = true;
+                    document.getElementById('stopBtn').disabled = false;
+                    addLog(`Started bot for ${selectedProfiles.length} profile(s)`, 'success');
+                } else {
+                    alert(data.error || 'Failed to start bot');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to connect to server');
+            }
+        }
+
+        // Stop Bot
+        async function stopBot() {
+            try {
+                await fetch(`${API_URL}/stop`, { method: 'POST' });
+                addLog('Stop requested...', 'info');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Status Polling
+        function startStatusPolling() {
+            statusInterval = setInterval(updateStatus, 1000);
+        }
+
+        async function updateStatus() {
+            try {
+                const response = await fetch(`${API_URL}/status`);
+                const status = await response.json();
+
+                // Update status indicator
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                const runBtn = document.getElementById('runBtn');
+                const stopBtn = document.getElementById('stopBtn');
+                const currentTaskPanel = document.getElementById('currentTaskPanel');
+                const currentTask = document.getElementById('currentTask');
+
+                if (status.running) {
+                    statusDot.classList.add('running');
+                    statusText.textContent = `Running: ${status.current_profile || 'Starting...'}`;
+                    runBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    
+                    if (status.current_task) {
+                        currentTaskPanel.style.display = 'block';
+                        currentTask.textContent = status.current_task;
+                    }
+                } else {
+                    statusDot.classList.remove('running');
+                    statusText.textContent = 'Idle';
+                    runBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    currentTaskPanel.style.display = 'none';
+                }
+
+                // Update profile status
+                document.querySelectorAll('.profile-item').forEach(item => {
+                    const name = item.dataset.name;
+                    item.classList.remove('running', 'completed', 'failed');
+                    
+                    // Remove old status badges
+                    const oldBadge = item.querySelector('.profile-status');
+                    if (oldBadge) oldBadge.remove();
+
+                    if (status.current_profile === name) {
+                        item.classList.add('running');
+                        item.querySelector('.profile-info').innerHTML += 
+                            `<span class="profile-status status-running">Running...</span>`;
+                    } else if (status.completed.includes(name)) {
+                        item.classList.add('completed');
+                        item.querySelector('.profile-info').innerHTML += 
+                            `<span class="profile-status status-completed">Done</span>`;
+                        // Uncheck completed profiles
+                        const cb = item.querySelector('.profile-checkbox');
+                        if (cb) cb.checked = false;
+                    } else if (status.failed.includes(name)) {
+                        item.classList.add('failed');
+                        item.querySelector('.profile-info').innerHTML += 
+                            `<span class="profile-status status-failed">Failed</span>`;
+                    }
+                });
+
+                // Update logs
+                if (status.logs && status.logs.length > 0) {
+                    const logConsole = document.getElementById('logConsole');
+                    logConsole.innerHTML = status.logs.map(log => {
+                        let className = '';
+                        if (log.includes('SUCCESS')) className = 'success';
+                        else if (log.includes('ERROR') || log.includes('FAILED')) className = 'error';
+                        else if (log.includes('STARTING') || log.includes('===') || log.includes('INFO')) className = 'info';
+                        
+                        return `<div class="log-entry ${className}">${log}</div>`;
+                    }).join('');
+                    
+                    logConsole.scrollTop = logConsole.scrollHeight;
+                }
+
+            } catch (error) {
+                console.error('Status update error:', error);
+            }
+        }
+
+        // Add log entry
+        function addLog(message, type = '') {
+            const logConsole = document.getElementById('logConsole');
+            const timestamp = new Date().toLocaleTimeString();
+            logConsole.innerHTML += `<div class="log-entry ${type}">[${timestamp}] ${message}</div>`;
+            logConsole.scrollTop = logConsole.scrollHeight;
+        }
+
+        // Copy logs to clipboard
+        function copyLogs() {
+            const logConsole = document.getElementById('logConsole');
+            const logs = Array.from(logConsole.querySelectorAll('.log-entry'))
+                .map(entry => entry.textContent)
+                .join('\n');
+            
+            navigator.clipboard.writeText(logs).then(() => {
+                showNotification('copyNotification');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = logs;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showNotification('copyNotification');
+            });
+        }
+
+        // Clear logs
+        function clearLogs() {
+            const logConsole = document.getElementById('logConsole');
+            logConsole.innerHTML = '<div class="log-entry info">Logs cleared...</div>';
+        }
+
+        // Download logs as text file
+        function downloadLogs() {
+            const logConsole = document.getElementById('logConsole');
+            const logs = Array.from(logConsole.querySelectorAll('.log-entry'))
+                .map(entry => entry.textContent)
+                .join('\n');
+            
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `fb_warmup_logs_${timestamp}.txt`;
+            
+            const blob = new Blob([logs], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Show notification
+        function showNotification(id) {
+            const notification = document.getElementById(id);
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

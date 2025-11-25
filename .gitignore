@@ -1,0 +1,142 @@
+# ===========================================
+# Facebook Warmup Bot - .gitignore
+# ===========================================
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ----- Virtual Environments -----
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+
+# ----- IDE / Editor -----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ----- Edge/Chrome WebDriver -----
+edgedriver_win64/
+chromedriver_win64/
+*.exe
+
+# ----- Logs -----
+*.log
+logs/
+facebook_warmup.log
+facebook_warmup_enhanced.log
+
+# ----- Screenshots -----
+warmupss/
+screenshots/
+*.png
+*.jpg
+*.jpeg
+
+# ----- Temporary Images -----
+temp_images/
+temp/
+tmp/
+
+# ----- Profile Data (SENSITIVE - DO NOT UPLOAD) -----
+profiles.json
+
+# ----- API Keys / Secrets (SENSITIVE) -----
+.env
+.env.local
+.env.production
+secrets.json
+config.json
+api_keys.txt
+
+# ----- OS Generated Files -----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ----- Flask -----
+instance/
+.webassets-cache
+
+# ----- Byte-compiled / optimized files -----
+*.pyc
+*.pyo
+*.pyd
+
+# ----- Distribution / packaging -----
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ----- Installer logs -----
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ----- Unit test / coverage reports -----
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# ----- Jupyter Notebook -----
+.ipynb_checkpoints
+
+# ----- Selenium -----
+geckodriver.log
+ghostdriver.log
+
+# ----- Session Data -----
+*.session
+*.cookies
