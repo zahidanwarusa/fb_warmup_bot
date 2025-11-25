@@ -355,6 +355,10 @@
             overflow-y: auto;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.85rem;
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
         }
 
         .log-entry {
@@ -490,14 +494,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Make log console selectable */
-        .log-console {
-            user-select: text;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
         }
 
         /* Footer */
@@ -752,8 +748,46 @@
             }
         }
 
-        // Select All checkbox handler
-        document.getElementById('selectAll').addEventListener('change', (e) => {
+        // ============ FIX: Select All checkbox handler - Auto-reset and regenerate queue ============
+        document.getElementById('selectAll').addEventListener('change', async (e) => {
+            // If selecting all and there was a previous run, reset status first
+            if (e.target.checked) {
+                try {
+                    // Check if there was a previous run (completed or failed profiles exist)
+                    const statusResponse = await fetch(`${API_URL}/api/status`);
+                    const status = await statusResponse.json();
+                    
+                    if (status.completed.length > 0 || status.failed.length > 0) {
+                        // Auto-reset status to clear previous run
+                        await fetch(`${API_URL}/api/reset`, { method: 'POST' });
+                        
+                        // Reload profiles to clear badges and re-enable checkboxes
+                        await loadProfiles();
+                        
+                        // Re-check all checkboxes after reload
+                        setTimeout(() => {
+                            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
+                            checkboxes.forEach(cb => cb.checked = true);
+                            document.getElementById('selectAll').checked = true;
+                            
+                            // Enable run button
+                            document.getElementById('runBtn').disabled = false;
+                            document.getElementById('stopBtn').disabled = true;
+                        }, 100);
+                        
+                        // Clear log display
+                        const logConsole = document.getElementById('logConsole');
+                        logConsole.innerHTML = '<div class="log-entry info">Status auto-reset. All profiles ready for new run.</div>';
+                        
+                        addLog('Status auto-reset. All profiles selected and ready.', 'info');
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error checking status:', error);
+                }
+            }
+            
+            // Normal select/deselect all behavior
             const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
             checkboxes.forEach(cb => cb.checked = e.target.checked);
         });
