@@ -383,6 +383,13 @@ def run_bot():
     if not selected_profiles:
         return jsonify({"error": "No profiles selected"}), 400
     
+    # FIX: Reset completed/failed status before starting new run
+    # This allows profiles to be selected again after a previous run
+    bot_status["completed"] = []
+    bot_status["failed"] = []
+    bot_status["logs"] = []
+    bot_status["task_results"] = {}
+    
     # Run in background thread
     thread = threading.Thread(target=run_bot_sequential, args=(selected_profiles,))
     thread.daemon = True
@@ -420,6 +427,14 @@ def reset_status():
         "logs": [],
         "task_results": {}
     }
+    return jsonify({"success": True})
+
+# FIX: New endpoint to clear logs from server
+@app.route('/api/clear-logs', methods=['POST'])
+def clear_logs():
+    """Clear the logs array on server side"""
+    global bot_status
+    bot_status["logs"] = []
     return jsonify({"success": True})
 
 if __name__ == '__main__':
