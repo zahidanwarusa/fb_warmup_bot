@@ -23,6 +23,10 @@ bot_status = {
     "stop_requested": False,
     "current_profile": None,
     "current_task": None,
+    "current_round": 0,
+    "total_rounds": 1,
+    "queue": [],           # List of {"profile": name, "round": num, "status": "pending/running/completed/failed"}
+    "current_queue_index": -1,
     "completed": [],
     "failed": [],
     "logs": [],
@@ -51,13 +55,18 @@ def add_log(message, level="INFO"):
         bot_status["logs"] = bot_status["logs"][-200:]
     print(log_entry)
 
-def run_bot_on_profile(profile):
+def run_bot_on_profile(profile, round_num, queue_index):
     """Run the warmup bot on a single profile"""
     from facebook_bot import FacebookWarmupBot
     
-    add_log(f"Starting bot for: {profile['name']}")
+    profile_round_key = f"{profile['name']}_R{round_num}"
+    
+    add_log(f"Starting bot for: {profile['name']} (Round {round_num})")
     bot_status["current_profile"] = profile['name']
-    bot_status["task_results"][profile['name']] = {}
+    bot_status["current_round"] = round_num
+    bot_status["current_queue_index"] = queue_index
+    bot_status["queue"][queue_index]["status"] = "running"
+    bot_status["task_results"][profile_round_key] = {}
     
     # Default Pexels API key
     PEXELS_API_KEY = "BpDFCOtx2UgT1vQF6KhXwecY5dLq8qiOjLkHWyqLgmBy1iX0gDIbVFPX"
@@ -69,6 +78,7 @@ def run_bot_on_profile(profile):
     
     results = {
         "profile": profile['name'],
+        "round": round_num,
         "tasks": {}
     }
     
@@ -76,6 +86,7 @@ def run_bot_on_profile(profile):
         # Check for stop request
         if bot_status["stop_requested"]:
             add_log("Stop requested - skipping profile", "WARNING")
+            bot_status["queue"][queue_index]["status"] = "skipped"
             return results
         
         # Task 1: Setup Browser
@@ -91,6 +102,7 @@ def run_bot_on_profile(profile):
         if bot_status["stop_requested"]:
             add_log("Stop requested - closing browser", "WARNING")
             bot.close_browser()
+            bot_status["queue"][queue_index]["status"] = "skipped"
             return results
         
         # Task 2: Navigate to Facebook
@@ -124,6 +136,7 @@ def run_bot_on_profile(profile):
         if bot_status["stop_requested"]:
             add_log("Stop requested - stopping tasks", "WARNING")
             bot.close_browser()
+            bot_status["queue"][queue_index]["status"] = "skipped"
             return results
         
         # Task 5: Browse Feed
@@ -161,6 +174,7 @@ def run_bot_on_profile(profile):
         if bot_status["stop_requested"]:
             add_log("Stop requested - stopping tasks", "WARNING")
             bot.close_browser()
+            bot_status["queue"][queue_index]["status"] = "skipped"
             return results
         
         # Task 8: Watch and Like Story
@@ -185,47 +199,32 @@ def run_bot_on_profile(profile):
         like_ok = bot.like_first_post()
         results["tasks"]["like_post"] = like_ok
         if like_ok:
-            add_log("Like post: SUCCESS", "SUCCESS")
+            add_log("Post like: SUCCESS", "SUCCESS")
         else:
-            add_log("Like post: FAILED", "WARNING")
+            add_log("Post like: SKIPPED", "WARNING")
         bot.random_delay(3, 5)
         
         # Check for stop request
         if bot_status["stop_requested"]:
             add_log("Stop requested - stopping tasks", "WARNING")
             bot.close_browser()
+            bot_status["queue"][queue_index]["status"] = "skipped"
             return results
         
         # Task 10: Comment on Post
         bot_status["current_task"] = "Commenting on post"
-        add_log("Commenting on post...")
-        try:
-            bot.driver.execute_script("window.scrollTo(0, 0);")
-        except:
-            pass
-        bot.random_delay(2, 3)
+        add_log("Commenting on first post...")
         comment_ok = bot.comment_on_first_post()
         results["tasks"]["comment"] = comment_ok
         if comment_ok:
             add_log("Comment: SUCCESS", "SUCCESS")
         else:
-            add_log("Comment: FAILED", "WARNING")
+            add_log("Comment: SKIPPED", "WARNING")
         bot.random_delay(3, 5)
-        
-        # Check for stop request
-        if bot_status["stop_requested"]:
-            add_log("Stop requested - stopping tasks", "WARNING")
-            bot.close_browser()
-            return results
         
         # Task 11: Create Image Post
         bot_status["current_task"] = "Creating image post"
-        add_log("Creating image post with stock photo...")
-        try:
-            bot.driver.execute_script("window.scrollTo(0, 0);")
-        except:
-            pass
-        bot.random_delay(2, 3)
+        add_log("Creating image post...")
         post_ok = bot.create_image_post()
         results["tasks"]["image_post"] = post_ok
         if post_ok:
@@ -233,17 +232,17 @@ def run_bot_on_profile(profile):
         else:
             add_log("Image post: FAILED", "WARNING")
         
-        # Summary
-        success_count = sum(1 for v in results["tasks"].values() if v)
-        total_count = len(results["tasks"])
-        add_log(f"Completed {success_count}/{total_count} tasks for: {profile['name']}", "SUCCESS")
-        bot_status["completed"].append(profile['name'])
-        bot_status["task_results"][profile['name']] = results["tasks"]
+        # All tasks completed successfully
+        bot_status["queue"][queue_index]["status"] = "completed"
+        bot_status["completed"].append(profile_round_key)
+        add_log(f"ALL TASKS COMPLETED for {profile['name']} (Round {round_num})", "SUCCESS")
+        bot_status["task_results"][profile_round_key] = results["tasks"]
         
     except Exception as e:
-        add_log(f"ERROR for {profile['name']}: {str(e)}", "ERROR")
+        add_log(f"ERROR for {profile['name']} (Round {round_num}): {str(e)}", "ERROR")
         results["error"] = str(e)
-        bot_status["failed"].append(profile['name'])
+        bot_status["queue"][queue_index]["status"] = "failed"
+        bot_status["failed"].append(profile_round_key)
     
     finally:
         bot_status["current_task"] = "Closing browser"
@@ -256,8 +255,8 @@ def run_bot_on_profile(profile):
     
     return results
 
-def run_bot_sequential(selected_profiles):
-    """Run bot on multiple profiles sequentially"""
+def run_bot_sequential(selected_profiles, loops=1):
+    """Run bot on multiple profiles sequentially with multiple rounds using queue system"""
     global bot_status
     
     bot_status["running"] = True
@@ -266,45 +265,87 @@ def run_bot_sequential(selected_profiles):
     bot_status["failed"] = []
     bot_status["logs"] = []
     bot_status["task_results"] = {}
+    bot_status["current_round"] = 0
+    bot_status["total_rounds"] = loops
+    bot_status["current_queue_index"] = -1
+    
+    # Build the queue - all profiles for all rounds
+    queue = []
+    for round_num in range(1, loops + 1):
+        for profile_name in selected_profiles:
+            queue.append({
+                "profile": profile_name,
+                "round": round_num,
+                "status": "pending"  # pending, running, completed, failed, skipped
+            })
+    
+    bot_status["queue"] = queue
     
     profiles = load_profiles()
-    total_profiles = len(selected_profiles)
-    current_index = 0
+    profiles_dict = {p['name']: p for p in profiles}
+    
+    total_tasks = len(queue)
     
     add_log("="*50)
-    add_log(f"STARTING BOT FOR {total_profiles} PROFILE(S)")
+    add_log(f"STARTING WARMUP QUEUE: {len(selected_profiles)} PROFILE(S) x {loops} ROUND(S) = {total_tasks} TASKS")
     add_log("="*50)
     add_log("Dashboard: Chrome | Automation: Edge")
     add_log("="*50)
     
-    for profile in profiles:
-        if profile['name'] in selected_profiles:
-            # Check for stop request
-            if bot_status["stop_requested"]:
-                add_log("STOP REQUESTED - Stopping all remaining profiles", "WARNING")
-                break
-            
-            current_index += 1
-            add_log("")
-            add_log("="*50)
-            add_log(f"PROFILE {current_index}/{total_profiles}: {profile['name']}")
-            add_log("="*50)
-            
-            run_bot_on_profile(profile)
-            
-            # Check if more profiles to process
-            if current_index < total_profiles and not bot_status["stop_requested"]:
-                add_log("Waiting 5 seconds before next profile...")
-                time.sleep(5)
+    # Display queue
+    add_log("")
+    add_log("QUEUE:")
+    for i, item in enumerate(queue):
+        add_log(f"  {i+1}. {item['profile']} - Round {item['round']}")
+    add_log("")
+    
+    # Process queue
+    for index, queue_item in enumerate(queue):
+        if bot_status["stop_requested"]:
+            add_log("STOP REQUESTED - Marking remaining tasks as skipped", "WARNING")
+            for remaining_index in range(index, len(queue)):
+                if bot_status["queue"][remaining_index]["status"] == "pending":
+                    bot_status["queue"][remaining_index]["status"] = "skipped"
+            break
+        
+        profile_name = queue_item["profile"]
+        round_num = queue_item["round"]
+        
+        if profile_name not in profiles_dict:
+            add_log(f"Profile '{profile_name}' not found - skipping", "WARNING")
+            bot_status["queue"][index]["status"] = "skipped"
+            continue
+        
+        profile = profiles_dict[profile_name]
+        
+        add_log("")
+        add_log("="*50)
+        add_log(f"TASK {index + 1}/{total_tasks}: {profile_name} (Round {round_num}/{loops})")
+        add_log("="*50)
+        
+        run_bot_on_profile(profile, round_num, index)
+        
+        # Check if more tasks to process
+        if index < total_tasks - 1 and not bot_status["stop_requested"]:
+            add_log("Waiting 5 seconds before next task...")
+            time.sleep(5)
+    
+    # Calculate final stats
+    completed_count = len([q for q in bot_status["queue"] if q["status"] == "completed"])
+    failed_count = len([q for q in bot_status["queue"] if q["status"] == "failed"])
+    skipped_count = len([q for q in bot_status["queue"] if q["status"] == "skipped"])
     
     bot_status["running"] = False
     bot_status["current_profile"] = None
     bot_status["current_task"] = None
+    bot_status["current_round"] = 0
+    bot_status["current_queue_index"] = -1
     
     add_log("")
     add_log("="*50)
-    add_log("ALL PROFILES COMPLETED!")
-    add_log(f"Success: {len(bot_status['completed'])} | Failed: {len(bot_status['failed'])}")
+    add_log("QUEUE COMPLETED!")
+    add_log(f"Total Tasks: {total_tasks}")
+    add_log(f"Completed: {completed_count} | Failed: {failed_count} | Skipped: {skipped_count}")
     add_log("="*50)
 
 # ============ ROUTES ============
@@ -379,23 +420,34 @@ def run_bot():
     
     data = request.json
     selected_profiles = data.get('profiles', [])
+    loops = data.get('loops', 1)  # Get loops parameter, default to 1
+    
+    # Validate loops
+    if not isinstance(loops, int) or loops < 1:
+        loops = 1
+    if loops > 100:  # Set a reasonable maximum
+        loops = 100
     
     if not selected_profiles:
         return jsonify({"error": "No profiles selected"}), 400
     
-    # FIX: Reset completed/failed status before starting new run
-    # This allows profiles to be selected again after a previous run
+    # Reset completed/failed status before starting new run
     bot_status["completed"] = []
     bot_status["failed"] = []
     bot_status["logs"] = []
     bot_status["task_results"] = {}
+    bot_status["queue"] = []
     
-    # Run in background thread
-    thread = threading.Thread(target=run_bot_sequential, args=(selected_profiles,))
+    # Run in background thread with loops parameter
+    thread = threading.Thread(target=run_bot_sequential, args=(selected_profiles, loops))
     thread.daemon = True
     thread.start()
     
-    return jsonify({"success": True, "message": f"Started bot for {len(selected_profiles)} profiles"})
+    total_tasks = len(selected_profiles) * loops
+    return jsonify({
+        "success": True, 
+        "message": f"Started queue: {len(selected_profiles)} profiles x {loops} rounds = {total_tasks} tasks"
+    })
 
 @app.route('/api/status', methods=['GET'])
 def get_status():
@@ -422,6 +474,10 @@ def reset_status():
         "stop_requested": False,
         "current_profile": None,
         "current_task": None,
+        "current_round": 0,
+        "total_rounds": 1,
+        "queue": [],
+        "current_queue_index": -1,
         "completed": [],
         "failed": [],
         "logs": [],

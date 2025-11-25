@@ -176,7 +176,7 @@
 
         /* Profile List */
         .profile-list {
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
@@ -291,6 +291,36 @@
             gap: 10px;
             margin-top: 20px;
             flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        /* Loop Input Styling */
+        .loop-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .loop-input-group label {
+            color: #a8b2d1;
+            font-size: 0.85rem;
+        }
+
+        .loop-input-group input {
+            width: 80px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .loop-input-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
         }
 
         /* Status Indicator */
@@ -346,12 +376,124 @@
             font-size: 1.1rem;
         }
 
+        /* Queue Display */
+        .queue-section {
+            margin-bottom: 20px;
+        }
+
+        .queue-section h3 {
+            color: #a8b2d1;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .queue-progress {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .queue-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #38ef7d 0%, #11998e 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .queue-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .queue-stat {
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .queue-stat.completed { color: #38ef7d; }
+        .queue-stat.failed { color: #eb3349; }
+        .queue-stat.pending { color: #a8b2d1; }
+        .queue-stat.skipped { color: #f5a623; }
+
+        .queue-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .queue-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            gap: 10px;
+        }
+
+        .queue-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .queue-item.pending {
+            background: rgba(168, 178, 209, 0.1);
+            color: #a8b2d1;
+        }
+
+        .queue-item.running {
+            background: rgba(79, 172, 254, 0.2);
+            color: #4facfe;
+            border: 1px solid #4facfe;
+        }
+
+        .queue-item.completed {
+            background: rgba(56, 239, 125, 0.1);
+            color: #38ef7d;
+        }
+
+        .queue-item.failed {
+            background: rgba(235, 51, 73, 0.1);
+            color: #eb3349;
+        }
+
+        .queue-item.skipped {
+            background: rgba(245, 166, 35, 0.1);
+            color: #f5a623;
+        }
+
+        .queue-item-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .queue-item-info {
+            flex: 1;
+        }
+
+        .queue-item-status {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
         /* Log Console */
         .log-console {
             background: #0a0a0f;
             border-radius: 10px;
             padding: 15px;
-            height: 300px;
+            height: 250px;
             overflow-y: auto;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.85rem;
@@ -548,6 +690,10 @@
                     </div>
 
                     <div class="controls">
+                        <div class="loop-input-group">
+                            <label for="loopCount">Warmup Rounds</label>
+                            <input type="number" id="loopCount" value="1" min="1" max="100">
+                        </div>
                         <button class="btn btn-success" id="runBtn" onclick="runBot()">
                             &#9654; Run Selected
                         </button>
@@ -579,17 +725,35 @@
                         <p id="currentTask">-</p>
                     </div>
 
+                    <!-- Queue Section -->
+                    <div class="queue-section" id="queueSection" style="display: none;">
+                        <h3>📋 Queue Progress</h3>
+                        <div class="queue-progress">
+                            <div class="queue-progress-bar" id="queueProgressBar" style="width: 0%"></div>
+                        </div>
+                        <div class="queue-stats" id="queueStats">
+                            <span class="queue-stat pending">Pending: 0</span>
+                            <span class="queue-stat completed">Completed: 0</span>
+                            <span class="queue-stat failed">Failed: 0</span>
+                        </div>
+                        <div class="queue-list" id="queueList">
+                            <!-- Queue items will be populated here -->
+                        </div>
+                    </div>
+
                     <div id="taskProgress">
                         <h4 style="color: #a8b2d1; margin-bottom: 10px; font-size: 0.9rem;">Tasks</h4>
                         <div class="task-list">
-                            <div class="task-item pending" data-task="browser"><span class="task-icon">&#9635;</span> Browser</div>
-                            <div class="task-item pending" data-task="login"><span class="task-icon">&#9919;</span> Login</div>
-                            <div class="task-item pending" data-task="feed"><span class="task-icon">&#9783;</span> Feed</div>
-                            <div class="task-item pending" data-task="profile"><span class="task-icon">&#9787;</span> Visit Profile</div>
-                            <div class="task-item pending" data-task="story"><span class="task-icon">&#9734;</span> Story</div>
-                            <div class="task-item pending" data-task="like"><span class="task-icon">&#9829;</span> Like</div>
-                            <div class="task-item pending" data-task="comment"><span class="task-icon">&#9998;</span> Comment</div>
-                            <div class="task-item pending" data-task="post"><span class="task-icon">&#9633;</span> Image Post</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Browser Setup</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Navigation</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Login Check</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Feed Access</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Browse Feed</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Visit Profile</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Watch Story</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Like Post</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Comment</div>
+                            <div class="task-item pending"><span class="task-icon">○</span> Image Post</div>
                         </div>
                     </div>
                 </div>
@@ -597,39 +761,32 @@
                 <!-- Logs Card -->
                 <div class="card">
                     <div class="logs-header">
-                        <h2><span class="icon">&#9776;</span> Logs</h2>
+                        <h2><span class="icon">&#128196;</span> Logs</h2>
                         <div class="logs-actions">
-                            <button class="btn-small" onclick="copyLogs()" title="Copy Logs">
-                                Copy
-                            </button>
-                            <button class="btn-small" onclick="clearLogs()" title="Clear Logs">
-                                Clear
-                            </button>
-                            <button class="btn-small" onclick="downloadLogs()" title="Download Logs">
-                                Save
-                            </button>
+                            <button class="btn-small" onclick="copyLogs()">Copy Logs</button>
+                            <button class="btn-small" onclick="clearLogs()">Clear</button>
                         </div>
                     </div>
                     <div class="log-console" id="logConsole">
                         <div class="log-entry info">Ready to start...</div>
                     </div>
                     <div class="copy-notification" id="copyNotification">
-                        Logs copied to clipboard!
+                        ✓ Logs copied to clipboard!
                     </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>Facebook Warmup Bot &copy; 2024 | Dashboard: Chrome | Automation: Edge</p>
+            <p>Facebook Warmup Bot v1.0 | Dashboard: Chrome | Automation: Edge</p>
         </footer>
     </div>
 
     <script>
-        const API_URL = '';
+        const API_URL = window.location.origin;
         let statusInterval = null;
 
-        // Initialize
+        // Load profiles on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadProfiles();
             startStatusPolling();
@@ -640,42 +797,40 @@
             try {
                 const response = await fetch(`${API_URL}/api/profiles`);
                 const profiles = await response.json();
-                renderProfiles(profiles);
+                
+                const profileList = document.getElementById('profileList');
+                
+                if (profiles.length === 0) {
+                    profileList.innerHTML = `
+                        <div class="empty-state">
+                            <span class="icon-large">[ ]</span>
+                            <p>No profiles added yet.<br>Add your first profile above.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                profileList.innerHTML = profiles.map(profile => `
+                    <div class="profile-item" data-id="${profile.id}" data-name="${profile.name}">
+                        <input type="checkbox" class="profile-checkbox" value="${profile.name}">
+                        <div class="profile-info">
+                            <div class="profile-name">${profile.name}</div>
+                            <div class="profile-path">${profile.path}</div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-edit" onclick="editProfile(${profile.id})">Edit</button>
+                            <button class="btn-delete" onclick="deleteProfile(${profile.id})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                updateSelectAll();
             } catch (error) {
                 console.error('Error loading profiles:', error);
             }
         }
 
-        // Render profiles list
-        function renderProfiles(profiles) {
-            const container = document.getElementById('profileList');
-            
-            if (profiles.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <span class="icon-large">[ ]</span>
-                        <p>No profiles added yet.<br>Add your first profile above.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = profiles.map(profile => `
-                <div class="profile-item" data-id="${profile.id}" data-name="${profile.name}">
-                    <input type="checkbox" class="profile-checkbox" value="${profile.name}">
-                    <div class="profile-info">
-                        <div class="profile-name">${profile.name}</div>
-                        <div class="profile-path">${profile.path}</div>
-                    </div>
-                    <div class="profile-actions">
-                        <button class="btn-edit" onclick="editProfile(${profile.id})">Edit</button>
-                        <button class="btn-delete" onclick="deleteProfile(${profile.id})">Delete</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Add profile form handler
+        // Add profile
         document.getElementById('addProfileForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -748,36 +903,30 @@
             }
         }
 
-        // ============ FIX: Select All checkbox handler - Auto-reset and regenerate queue ============
+        // Select All checkbox handler
         document.getElementById('selectAll').addEventListener('change', async (e) => {
-            // If selecting all and there was a previous run, reset status first
             if (e.target.checked) {
                 try {
-                    // Check if there was a previous run (completed or failed profiles exist)
                     const statusResponse = await fetch(`${API_URL}/api/status`);
                     const status = await statusResponse.json();
                     
                     if (status.completed.length > 0 || status.failed.length > 0) {
-                        // Auto-reset status to clear previous run
                         await fetch(`${API_URL}/api/reset`, { method: 'POST' });
-                        
-                        // Reload profiles to clear badges and re-enable checkboxes
                         await loadProfiles();
                         
-                        // Re-check all checkboxes after reload
                         setTimeout(() => {
                             const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
                             checkboxes.forEach(cb => cb.checked = true);
                             document.getElementById('selectAll').checked = true;
-                            
-                            // Enable run button
                             document.getElementById('runBtn').disabled = false;
                             document.getElementById('stopBtn').disabled = true;
                         }, 100);
                         
-                        // Clear log display
                         const logConsole = document.getElementById('logConsole');
                         logConsole.innerHTML = '<div class="log-entry info">Status auto-reset. All profiles ready for new run.</div>';
+                        
+                        // Hide queue section
+                        document.getElementById('queueSection').style.display = 'none';
                         
                         addLog('Status auto-reset. All profiles selected and ready.', 'info');
                         return;
@@ -787,7 +936,6 @@
                 }
             }
             
-            // Normal select/deselect all behavior
             const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
             checkboxes.forEach(cb => cb.checked = e.target.checked);
         });
@@ -804,7 +952,6 @@
             selectAll.checked = Array.from(checkboxes).every(cb => cb.checked);
         }
 
-        // Add change listener to profile checkboxes
         document.getElementById('profileList').addEventListener('change', (e) => {
             if (e.target.classList.contains('profile-checkbox')) {
                 updateSelectAll();
@@ -815,6 +962,7 @@
         async function runBot() {
             const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox:checked');
             const selectedProfiles = Array.from(checkboxes).map(cb => cb.value);
+            const loopCount = parseInt(document.getElementById('loopCount').value) || 1;
 
             if (selectedProfiles.length === 0) {
                 alert('Please select at least one profile');
@@ -825,7 +973,10 @@
                 const response = await fetch(`${API_URL}/api/run`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ profiles: selectedProfiles })
+                    body: JSON.stringify({ 
+                        profiles: selectedProfiles,
+                        loops: loopCount
+                    })
                 });
 
                 const data = await response.json();
@@ -833,12 +984,13 @@
                 if (response.ok) {
                     document.getElementById('runBtn').disabled = true;
                     document.getElementById('stopBtn').disabled = false;
-                    addLog(`Started bot for ${selectedProfiles.length} profile(s)`, 'success');
+                    document.getElementById('queueSection').style.display = 'block';
+                    addLog(`Started queue: ${selectedProfiles.length} profile(s) x ${loopCount} round(s)`, 'success');
                 } else {
                     alert(data.error || 'Failed to start bot');
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error running bot:', error);
                 alert('Failed to connect to server');
             }
         }
@@ -847,26 +999,26 @@
         async function stopBot() {
             try {
                 await fetch(`${API_URL}/api/stop`, { method: 'POST' });
-                addLog('Stop requested...', 'info');
+                addLog('Stop requested - will stop after current task', 'error');
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error stopping bot:', error);
             }
         }
 
-        // FIX: Reset Status - allows profiles to be selected again
+        // Reset Status
         async function resetStatus() {
             try {
                 const response = await fetch(`${API_URL}/api/reset`, { method: 'POST' });
                 const data = await response.json();
                 
                 if (response.ok) {
-                    loadProfiles(); // Reload to clear badges
+                    loadProfiles();
                     document.getElementById('runBtn').disabled = false;
                     document.getElementById('stopBtn').disabled = true;
+                    document.getElementById('queueSection').style.display = 'none';
                     
-                    // Clear local log display
                     const logConsole = document.getElementById('logConsole');
-                    logConsole.innerHTML = '<div class="log-entry info">Status reset. Ready to start...</div>';
+                    logConsole.innerHTML = '<div class="log-entry info">Ready to start...</div>';
                     
                     addLog('Status reset', 'info');
                 } else {
@@ -896,13 +1048,16 @@
                 statusDot.className = 'status-dot';
                 if (status.running) {
                     statusDot.classList.add('running');
-                    statusText.textContent = `Running: ${status.current_profile || '...'}`;
+                    statusText.textContent = `Running: ${status.current_profile || '...'} (Round ${status.current_round || 1})`;
                     document.getElementById('runBtn').disabled = true;
                     document.getElementById('stopBtn').disabled = false;
                 } else {
-                    if (status.completed.length > 0 || status.failed.length > 0) {
+                    const completedCount = status.queue.filter(q => q.status === 'completed').length;
+                    const failedCount = status.queue.filter(q => q.status === 'failed').length;
+                    
+                    if (completedCount > 0 || failedCount > 0) {
                         statusDot.classList.add('completed');
-                        statusText.textContent = `Done (${status.completed.length} success, ${status.failed.length} failed)`;
+                        statusText.textContent = `Done (${completedCount} success, ${failedCount} failed)`;
                     } else {
                         statusDot.classList.add('idle');
                         statusText.textContent = 'Idle';
@@ -922,35 +1077,29 @@
                     taskPanel.style.display = 'none';
                 }
 
+                // Update queue display
+                if (status.queue && status.queue.length > 0) {
+                    document.getElementById('queueSection').style.display = 'block';
+                    updateQueueDisplay(status.queue, status.current_queue_index);
+                }
+
                 // Update profile list status
                 const profileItems = document.querySelectorAll('.profile-item');
                 profileItems.forEach(item => {
                     const name = item.dataset.name;
                     item.classList.remove('running', 'completed', 'failed');
                     
-                    // Remove old status badges
                     const oldBadge = item.querySelector('.profile-status');
                     if (oldBadge) oldBadge.remove();
 
-                    if (status.current_profile === name) {
+                    if (status.current_profile === name && status.running) {
                         item.classList.add('running');
                         item.querySelector('.profile-info').innerHTML += 
-                            `<span class="profile-status status-running">Running...</span>`;
-                    } else if (status.completed.includes(name)) {
-                        item.classList.add('completed');
-                        item.querySelector('.profile-info').innerHTML += 
-                            `<span class="profile-status status-completed">Done</span>`;
-                        // Uncheck completed profiles
-                        const cb = item.querySelector('.profile-checkbox');
-                        if (cb) cb.checked = false;
-                    } else if (status.failed.includes(name)) {
-                        item.classList.add('failed');
-                        item.querySelector('.profile-info').innerHTML += 
-                            `<span class="profile-status status-failed">Failed</span>`;
+                            `<span class="profile-status status-running">Running (R${status.current_round || 1})</span>`;
                     }
                 });
 
-                // Update logs - only if server has logs
+                // Update logs
                 if (status.logs && status.logs.length > 0) {
                     const logConsole = document.getElementById('logConsole');
                     logConsole.innerHTML = status.logs.map(log => {
@@ -969,6 +1118,49 @@
             }
         }
 
+        // Update queue display
+        function updateQueueDisplay(queue, currentIndex) {
+            const queueList = document.getElementById('queueList');
+            const queueStats = document.getElementById('queueStats');
+            const progressBar = document.getElementById('queueProgressBar');
+            
+            // Calculate stats
+            const pending = queue.filter(q => q.status === 'pending').length;
+            const running = queue.filter(q => q.status === 'running').length;
+            const completed = queue.filter(q => q.status === 'completed').length;
+            const failed = queue.filter(q => q.status === 'failed').length;
+            const skipped = queue.filter(q => q.status === 'skipped').length;
+            
+            // Update stats
+            queueStats.innerHTML = `
+                <span class="queue-stat pending">Pending: ${pending}</span>
+                <span class="queue-stat completed">Completed: ${completed}</span>
+                <span class="queue-stat failed">Failed: ${failed}</span>
+                ${skipped > 0 ? `<span class="queue-stat skipped">Skipped: ${skipped}</span>` : ''}
+            `;
+            
+            // Update progress bar
+            const progress = ((completed + failed + skipped) / queue.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Update queue list
+            queueList.innerHTML = queue.map((item, index) => {
+                let icon = '○';
+                if (item.status === 'running') icon = '▶';
+                else if (item.status === 'completed') icon = '✓';
+                else if (item.status === 'failed') icon = '✗';
+                else if (item.status === 'skipped') icon = '⊘';
+                
+                return `
+                    <div class="queue-item ${item.status}">
+                        <span class="queue-item-icon">${icon}</span>
+                        <span class="queue-item-info">${item.profile} - Round ${item.round}</span>
+                        <span class="queue-item-status">${item.status}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // Add log entry
         function addLog(message, type = '') {
             const logConsole = document.getElementById('logConsole');
@@ -985,65 +1177,22 @@
                 .join('\n');
             
             navigator.clipboard.writeText(logs).then(() => {
-                showNotification('copyNotification');
-            }).catch(err => {
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = logs;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showNotification('copyNotification');
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
             });
         }
 
-        // FIX: Clear logs - now calls server to clear logs array
+        // Clear logs
         async function clearLogs() {
             try {
-                // Clear logs on the server
                 await fetch(`${API_URL}/api/clear-logs`, { method: 'POST' });
-                
-                // Clear local display
-                const logConsole = document.getElementById('logConsole');
-                logConsole.innerHTML = '<div class="log-entry info">Logs cleared...</div>';
             } catch (error) {
-                console.error('Failed to clear logs:', error);
-                // Still clear local display even if server call fails
-                const logConsole = document.getElementById('logConsole');
-                logConsole.innerHTML = '<div class="log-entry info">Logs cleared...</div>';
+                console.error('Error clearing server logs:', error);
             }
-        }
-
-        // Download logs as text file
-        function downloadLogs() {
+            
             const logConsole = document.getElementById('logConsole');
-            const logs = Array.from(logConsole.querySelectorAll('.log-entry'))
-                .map(entry => entry.textContent)
-                .join('\n');
-            
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            const filename = `fb_warmup_logs_${timestamp}.txt`;
-            
-            const blob = new Blob([logs], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // Show notification
-        function showNotification(id) {
-            const notification = document.getElementById(id);
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 2000);
+            logConsole.innerHTML = '<div class="log-entry info">Logs cleared</div>';
         }
     </script>
 </body>
