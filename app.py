@@ -30,7 +30,9 @@ bot_status = {
     "completed": [],
     "failed": [],
     "logs": [],
-    "task_results": {}
+    "task_results": {},
+    "delay_remaining": 0,  # NEW: Time remaining in delay (seconds)
+    "is_delaying": False   # NEW: Whether currently in delay period
 }
 
 def load_profiles():
@@ -255,7 +257,7 @@ def run_bot_on_profile(profile, round_num, queue_index):
     
     return results
 
-def run_bot_sequential(selected_profiles, loops=1):
+def run_bot_sequential(selected_profiles, loops=1, loop_delay_seconds=0):
     """Run bot on multiple profiles sequentially with multiple rounds using queue system"""
     global bot_status
     
@@ -268,6 +270,8 @@ def run_bot_sequential(selected_profiles, loops=1):
     bot_status["current_round"] = 0
     bot_status["total_rounds"] = loops
     bot_status["current_queue_index"] = -1
+    bot_status["delay_remaining"] = 0
+    bot_status["is_delaying"] = False
     
     # Build the queue - all profiles for all rounds
     queue = []
@@ -288,6 +292,9 @@ def run_bot_sequential(selected_profiles, loops=1):
     
     add_log("="*50)
     add_log(f"STARTING WARMUP QUEUE: {len(selected_profiles)} PROFILE(S) x {loops} ROUND(S) = {total_tasks} TASKS")
+    if loop_delay_seconds > 0:
+        delay_display = f"{int(loop_delay_seconds // 3600)}h {int((loop_delay_seconds % 3600) // 60)}m" if loop_delay_seconds >= 3600 else f"{int(loop_delay_seconds // 60)}m {int(loop_delay_seconds % 60)}s"
+        add_log(f"Loop Delay: {delay_display} between rounds")
     add_log("="*50)
     add_log("Dashboard: Chrome | Automation: Edge")
     add_log("="*50)
@@ -300,6 +307,7 @@ def run_bot_sequential(selected_profiles, loops=1):
     add_log("")
     
     # Process queue
+    current_round = 1
     for index, queue_item in enumerate(queue):
         if bot_status["stop_requested"]:
             add_log("STOP REQUESTED - Marking remaining tasks as skipped", "WARNING")
@@ -310,6 +318,55 @@ def run_bot_sequential(selected_profiles, loops=1):
         
         profile_name = queue_item["profile"]
         round_num = queue_item["round"]
+        
+        # Check if we're starting a new round and need to delay
+        if round_num > current_round and loop_delay_seconds > 0:
+            current_round = round_num
+            
+            add_log("")
+            add_log("="*50)
+            add_log(f"ROUND {round_num - 1} COMPLETED - Starting delay before Round {round_num}")
+            add_log("="*50)
+            
+            bot_status["is_delaying"] = True
+            bot_status["delay_remaining"] = loop_delay_seconds
+            bot_status["current_task"] = f"Waiting {int(loop_delay_seconds // 60)}m {int(loop_delay_seconds % 60)}s before Round {round_num}"
+            
+            # Countdown delay with 1-second updates
+            remaining = loop_delay_seconds
+            while remaining > 0 and not bot_status["stop_requested"]:
+                bot_status["delay_remaining"] = remaining
+                
+                # Log at intervals
+                if remaining == loop_delay_seconds or remaining % 60 == 0 or remaining <= 10:
+                    hours = int(remaining // 3600)
+                    minutes = int((remaining % 3600) // 60)
+                    seconds = int(remaining % 60)
+                    
+                    if hours > 0:
+                        time_str = f"{hours}h {minutes}m {seconds}s"
+                    elif minutes > 0:
+                        time_str = f"{minutes}m {seconds}s"
+                    else:
+                        time_str = f"{seconds}s"
+                    
+                    add_log(f"Delay remaining: {time_str}")
+                
+                time.sleep(1)
+                remaining -= 1
+            
+            bot_status["is_delaying"] = False
+            bot_status["delay_remaining"] = 0
+            
+            if bot_status["stop_requested"]:
+                add_log("STOP REQUESTED during delay - Marking remaining tasks as skipped", "WARNING")
+                for remaining_index in range(index, len(queue)):
+                    if bot_status["queue"][remaining_index]["status"] == "pending":
+                        bot_status["queue"][remaining_index]["status"] = "skipped"
+                break
+            
+            add_log(f"Delay complete - Starting Round {round_num}")
+            add_log("")
         
         if profile_name not in profiles_dict:
             add_log(f"Profile '{profile_name}' not found - skipping", "WARNING")
@@ -340,6 +397,8 @@ def run_bot_sequential(selected_profiles, loops=1):
     bot_status["current_task"] = None
     bot_status["current_round"] = 0
     bot_status["current_queue_index"] = -1
+    bot_status["is_delaying"] = False
+    bot_status["delay_remaining"] = 0
     
     add_log("")
     add_log("="*50)
@@ -420,13 +479,23 @@ def run_bot():
     
     data = request.json
     selected_profiles = data.get('profiles', [])
-    loops = data.get('loops', 1)  # Get loops parameter, default to 1
+    loops = data.get('loops', 1)
+    loop_delay_value = data.get('loop_delay_value', 0)
+    loop_delay_unit = data.get('loop_delay_unit', 'minutes')
     
     # Validate loops
     if not isinstance(loops, int) or loops < 1:
         loops = 1
-    if loops > 100:  # Set a reasonable maximum
+    if loops > 100:
         loops = 100
+    
+    # Convert delay to seconds
+    loop_delay_seconds = 0
+    if loop_delay_value > 0:
+        if loop_delay_unit == 'hours':
+            loop_delay_seconds = loop_delay_value * 3600
+        else:  # minutes
+            loop_delay_seconds = loop_delay_value * 60
     
     if not selected_profiles:
         return jsonify({"error": "No profiles selected"}), 400
@@ -438,8 +507,8 @@ def run_bot():
     bot_status["task_results"] = {}
     bot_status["queue"] = []
     
-    # Run in background thread with loops parameter
-    thread = threading.Thread(target=run_bot_sequential, args=(selected_profiles, loops))
+    # Run in background thread with loops and loop_delay parameters
+    thread = threading.Thread(target=run_bot_sequential, args=(selected_profiles, loops, loop_delay_seconds))
     thread.daemon = True
     thread.start()
     
@@ -481,7 +550,9 @@ def reset_status():
         "completed": [],
         "failed": [],
         "logs": [],
-        "task_results": {}
+        "task_results": {},
+        "delay_remaining": 0,
+        "is_delaying": False
     }
     return jsonify({"success": True})
 
