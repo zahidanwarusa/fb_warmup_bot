@@ -12,6 +12,7 @@ import os
 import time
 from pathlib import Path
 from datetime import datetime
+from scheduler import BotScheduler
 
 app = Flask(__name__)
 CORS(app)
@@ -32,8 +33,12 @@ bot_status = {
     "logs": [],
     "task_results": {},
     "delay_remaining": 0,  # NEW: Time remaining in delay (seconds)
-    "is_delaying": False   # NEW: Whether currently in delay period
+    "is_delaying": False,  # NEW: Whether currently in delay period
+    "schedule_id": None    # NEW: ID of schedule that triggered this run (if any)
 }
+
+# Initialize scheduler
+scheduler = None
 
 def load_profiles():
     """Load profiles from JSON file"""
@@ -257,7 +262,7 @@ def run_bot_on_profile(profile, round_num, queue_index):
     
     return results
 
-def run_bot_sequential(selected_profiles, loops=1, loop_delay_seconds=0):
+def run_bot_sequential(selected_profiles, loops=1, loop_delay_seconds=0, schedule_id=None):
     """Run bot on multiple profiles sequentially with multiple rounds using queue system"""
     global bot_status
     
@@ -272,6 +277,7 @@ def run_bot_sequential(selected_profiles, loops=1, loop_delay_seconds=0):
     bot_status["current_queue_index"] = -1
     bot_status["delay_remaining"] = 0
     bot_status["is_delaying"] = False
+    bot_status["schedule_id"] = schedule_id
     
     # Build the queue - all profiles for all rounds
     queue = []
@@ -399,7 +405,8 @@ def run_bot_sequential(selected_profiles, loops=1, loop_delay_seconds=0):
     bot_status["current_queue_index"] = -1
     bot_status["is_delaying"] = False
     bot_status["delay_remaining"] = 0
-    
+    bot_status["schedule_id"] = None
+
     add_log("")
     add_log("="*50)
     add_log("QUEUE COMPLETED!")
@@ -564,19 +571,138 @@ def clear_logs():
     bot_status["logs"] = []
     return jsonify({"success": True})
 
+# ============ SCHEDULER ROUTES ============
+
+@app.route('/api/schedules', methods=['GET'])
+def get_schedules():
+    """Get all schedules"""
+    if scheduler:
+        schedules = scheduler.get_schedules()
+        return jsonify(schedules)
+    return jsonify([])
+
+@app.route('/api/schedules', methods=['POST'])
+def create_schedule():
+    """Create a new schedule"""
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    data = request.json
+
+    # Validate required fields
+    if not data.get('name'):
+        return jsonify({"error": "Schedule name is required"}), 400
+    if not data.get('profiles') or len(data.get('profiles', [])) == 0:
+        return jsonify({"error": "At least one profile must be selected"}), 400
+
+    schedule = scheduler.add_schedule(data)
+    return jsonify(schedule)
+
+@app.route('/api/schedules/<int:schedule_id>', methods=['GET'])
+def get_schedule(schedule_id):
+    """Get a specific schedule"""
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    schedule = scheduler.get_schedule(schedule_id)
+    if schedule:
+        return jsonify(schedule)
+    return jsonify({"error": "Schedule not found"}), 404
+
+@app.route('/api/schedules/<int:schedule_id>', methods=['PUT'])
+def update_schedule(schedule_id):
+    """Update a schedule"""
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    data = request.json
+    schedule = scheduler.update_schedule(schedule_id, data)
+
+    if schedule:
+        return jsonify(schedule)
+    return jsonify({"error": "Schedule not found"}), 404
+
+@app.route('/api/schedules/<int:schedule_id>', methods=['DELETE'])
+def delete_schedule(schedule_id):
+    """Delete a schedule"""
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    scheduler.delete_schedule(schedule_id)
+    return jsonify({"success": True})
+
+@app.route('/api/schedules/<int:schedule_id>/toggle', methods=['POST'])
+def toggle_schedule(schedule_id):
+    """Enable or disable a schedule"""
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    data = request.json
+    enabled = data.get('enabled', True)
+
+    schedule = scheduler.toggle_schedule(schedule_id, enabled)
+    if schedule:
+        return jsonify(schedule)
+    return jsonify({"error": "Schedule not found"}), 404
+
+@app.route('/api/schedules/<int:schedule_id>/run-now', methods=['POST'])
+def run_schedule_now(schedule_id):
+    """Manually trigger a schedule to run immediately"""
+    global bot_status
+
+    if not scheduler:
+        return jsonify({"error": "Scheduler not initialized"}), 500
+
+    if bot_status["running"]:
+        return jsonify({"error": "Bot is already running"}), 400
+
+    schedule = scheduler.get_schedule(schedule_id)
+    if not schedule:
+        return jsonify({"error": "Schedule not found"}), 404
+
+    # Convert loop_delay to seconds
+    loop_delay_seconds = 0
+    if schedule.get('loop_delay_value', 0) > 0:
+        if schedule.get('loop_delay_unit') == 'hours':
+            loop_delay_seconds = schedule['loop_delay_value'] * 3600
+        else:
+            loop_delay_seconds = schedule['loop_delay_value'] * 60
+
+    # Run in background thread
+    thread = threading.Thread(
+        target=run_bot_sequential,
+        args=(schedule['profiles'], schedule['loops'], loop_delay_seconds, schedule_id)
+    )
+    thread.daemon = True
+    thread.start()
+
+    return jsonify({
+        "success": True,
+        "message": f"Schedule '{schedule['name']}' triggered manually"
+    })
+
 if __name__ == '__main__':
     # Create templates folder if not exists
     os.makedirs('templates', exist_ok=True)
-    
+
     # Create required directories
     os.makedirs('warmupss', exist_ok=True)
     os.makedirs('temp_images', exist_ok=True)
-    
+
+    # Initialize and start scheduler
+    scheduler = BotScheduler(run_bot_callback=run_bot_sequential)
+    scheduler.start()
+
     print("\n" + "="*60)
     print("Facebook Warmup Bot - Web Interface".center(60))
     print("="*60)
     print("\n  Dashboard: Open http://localhost:5000 in Chrome")
     print("  Automation: Uses Edge browser profiles")
+    print("  Scheduler: Active and running")
     print("\n" + "="*60 + "\n")
-    
-    app.run(debug=True, port=5000, threaded=True)
+
+    try:
+        app.run(debug=True, port=5000, threaded=True, use_reloader=False)
+    finally:
+        if scheduler:
+            scheduler.stop()

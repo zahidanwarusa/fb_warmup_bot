@@ -9654,3 +9654,365 @@ Photo by Johannes Plenio
 2025-12-25 19:44:19,276 - INFO - 127.0.0.1 - - [25/Dec/2025 19:44:19] "GET /api/status HTTP/1.1" 200 -
 2025-12-25 19:44:20,585 - INFO - 127.0.0.1 - - [25/Dec/2025 19:44:20] "GET /api/status HTTP/1.1" 200 -
 2025-12-25 19:44:21,267 - INFO - 127.0.0.1 - - [25/Dec/2025 19:44:21] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:15,662 - INFO - Screenshots will be saved to: warmupss
+2025-12-25 21:24:15,663 - INFO - Setting up Microsoft Edge browser...
+2025-12-25 21:24:15,663 - INFO - Using Edge driver from: C:\Users\ABC\Downloads\fb_warmup_app (1)\fb_warmup_app\edgedriver_win64\msedgedriver.exe
+2025-12-25 21:24:15,663 - INFO - Loading Edge profile from: C:\Users\ABC\AppData\Local\Microsoft\Edge\User Data\Profile 7
+2025-12-25 21:24:15,663 - INFO - User Data Dir: C:/Users/ABC/AppData/Local/Microsoft/Edge/User Data
+2025-12-25 21:24:15,663 - INFO - Profile Dir: Profile 7
+2025-12-25 21:24:16,037 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:16,731 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:17,286 - INFO - Browser setup completed successfully!
+2025-12-25 21:24:18,040 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:18,732 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:20,045 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:20,287 - INFO - Navigating to Facebook...
+2025-12-25 21:24:21,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:21] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:22,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:23,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:23] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:24,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:25,317 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:25] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:25,502 - INFO - Waiting for page to load...
+2025-12-25 21:24:26,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:27,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:27] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:28,626 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:29,330 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:29] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:29,735 - INFO - Current URL: https://www.facebook.com/
+2025-12-25 21:24:29,735 - INFO - Successfully loaded Facebook
+2025-12-25 21:24:30,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:31,323 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:32,630 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:32] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:32,735 - INFO - Checking login status...
+2025-12-25 21:24:33,323 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:33] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:34,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:34] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:35,334 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:35] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:36,650 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:36] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:37,327 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:37] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:38,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:38] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:39,327 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:39] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:40,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:40] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:41,326 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:41] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:42,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:42] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:43,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:43] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:44,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:44] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:45,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:45] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:46,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:46] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:47,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:47] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:48,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:48] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:49,332 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:49] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:50,047 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:50] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:50,733 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:50] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:52,043 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:52] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:53,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:53] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:54,370 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:54] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:54,737 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:54] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:56,042 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:56] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:56,736 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:56] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:58,032 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:58] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:24:58,736 - INFO - 127.0.0.1 - - [25/Dec/2025 21:24:58] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:00,029 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:00] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:00,736 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:00] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:02,048 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:02] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:02,737 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:02] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:04,042 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:04] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:04,739 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:04] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:06,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:07,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:07] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:08,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:09,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:09] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:10,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:11,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:11] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:12,635 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:13,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:13] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:14,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:15,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:15] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:16,098 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:16,723 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:18,055 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:18,730 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:20,036 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:20,728 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:22,036 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:22,724 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:24,039 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:24,730 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:24,927 - INFO - SUCCESS: User is logged in to Facebook!
+2025-12-25 21:25:24,928 - INFO - Verifying feed access...
+2025-12-25 21:25:26,037 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:26,739 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:28,029 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:28,733 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:30,041 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:31,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:32,630 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:32] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:33,318 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:33] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:34,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:34] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:35,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:35] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:36,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:36] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:37,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:37] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:38,068 - INFO - SUCCESS: Feed verified! Found 4 feed elements
+2025-12-25 21:25:38,079 - INFO - INFO: Visible posts in feed: 2
+2025-12-25 21:25:38,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:38] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:39,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:39] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:40,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:40] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:41,327 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:41] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:42,624 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:42] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:43,332 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:43] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:44,176 - INFO - VISITING FIRST POST AUTHOR'S PROFILE
+2025-12-25 21:25:44,177 - INFO - Trying multiple methods to find and click profile...
+2025-12-25 21:25:44,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:44] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:45,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:45] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:46,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:46] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:47,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:47] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:48,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:48] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:49,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:49] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:50,632 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:50] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:51,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:51] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:52,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:52] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:53,327 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:53] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:53,333 - INFO - METHOD 0: Trying exact XPATHs for profile name...
+2025-12-25 21:25:54,630 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:54] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:55,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:55] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:56,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:56] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:57,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:57] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:58,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:58] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:25:59,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:25:59] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:00,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:00] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:01,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:01] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:02,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:02] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:03,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:03] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:04,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:04] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:05,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:05] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:06,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:07,327 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:07] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:08,635 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:09,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:09] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:10,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:11,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:11] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:12,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:13,315 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:13] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:13,429 - INFO - Method 0: Found element with exact XPATH
+2025-12-25 21:26:13,455 - INFO - Method 0: Profile link: https://www.facebook.com/HolisticHealth.CLP?__cft__[0]=AZYlUaOWb4OBSSXJppAYHWsV2k9cv6WnpUne9rua473zOM2WBtM-WsYlG2waFZgslBlCOZEQ_UI45NOI760fXjjSh9Iy4NW8KidFxKxbvoLdM9NY4ZCi616Kz1aFnCtEse9SERSyoDhsnMPJV6v3bBwY9TdViigKpebfv08QKpEQWjZ-ZLbwhG6SIf5N9QrvlllugvY9FpTLsQrU5pzkRSf5e2w_23_txuu5pSt9DHxsAzpHn5pQ3J0MkETcBsAwHD8VieO2BWfgbMV_FC8NAHJgR3M6ld63q4SD25rBBTReO_QnGK5LvH9dj7vmxIjcrIs&__tn__=-UC%2CP-R
+2025-12-25 21:26:14,623 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:15,332 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:15] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:16,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:17,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:17] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:18,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:19,331 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:19] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:20,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:21,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:21] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:22,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:22,931 - INFO - SUCCESS: Navigated to profile: https://www.facebook.com/HolisticHealth.CLP
+2025-12-25 21:26:23,323 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:23] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:24,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:25,332 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:25] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:26,635 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:26,824 - INFO - Screenshot saved: warmupss\profile_visit_success.png
+2025-12-25 21:26:27,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:27] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:28,635 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:29,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:29] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:30,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:26:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:26:31,453 - INFO - RETURNING TO HOME FEED
+2025-12-25 21:26:38,521 - INFO - SUCCESS: RETURNED TO HOME FEED!
+2025-12-25 21:26:45,282 - INFO - WATCHING FIRST STORY
+2025-12-25 21:26:45,283 - INFO - Trying multiple methods to find and open stories...
+2025-12-25 21:26:47,545 - INFO - METHOD 1: Searching by aria-label...
+2025-12-25 21:26:47,615 - INFO - Method 1: Found story element at index 1
+2025-12-25 21:27:06,333 - INFO - 127.0.0.1 - - [25/Dec/2025 21:27:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:27:23,347 - INFO - Method 1: Found story element at index 1
+2025-12-25 21:27:28,940 - INFO - Story viewer opened (URL contains /stories/)
+2025-12-25 21:27:28,941 - INFO - Watching story for 6.6 seconds...
+2025-12-25 21:27:35,624 - INFO - Found like button, clicking...
+2025-12-25 21:27:37,966 - INFO - Story liked!
+2025-12-25 21:27:37,966 - INFO - Closing story viewer...
+2025-12-25 21:27:39,871 - INFO - Story closed with Escape key
+2025-12-25 21:27:39,871 - INFO - SUCCESS: STORY WATCHED!
+2025-12-25 21:27:40,141 - INFO - Screenshot saved: warmupss\story_success.png
+2025-12-25 21:27:45,977 - INFO - LIKING FIRST POST IN FEED
+2025-12-25 21:27:54,569 - INFO - Like button clicked
+2025-12-25 21:27:57,522 - INFO - SUCCESS: POST LIKED!
+2025-12-25 21:27:57,784 - INFO - Screenshot saved: warmupss\like_success.png
+2025-12-25 21:28:01,929 - INFO - COMMENTING ON FIRST POST IN FEED
+2025-12-25 21:28:01,930 - INFO - Comment text: Superb stuff - love it!
+2025-12-25 21:28:06,650 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:06,959 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:08,043 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:08,726 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:10,042 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:10,245 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:10] "POST /api/stop HTTP/1.1" 200 -
+2025-12-25 21:28:10,728 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:10,916 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D70F890>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:12,040 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:12,728 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:14,038 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:14,723 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:15,004 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D70F9D0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:16,037 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:16,725 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:18,033 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:18,738 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:19,092 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D7268B0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:20,044 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:20,733 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:22,048 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:22,730 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:23,169 - ERROR - Error commenting: HTTPConnectionPool(host='localhost', port=49472): Max retries exceeded with url: /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D726C40>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-12-25 21:28:24,047 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:24,725 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:25,674 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:25] "[31m[1mPOST /api/reset HTTP/1.1[0m" 400 -
+2025-12-25 21:28:27,248 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D73F9B0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:28:30,594 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:31,033 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:31,345 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D7369C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:28:31,742 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:33,041 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:33] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:34,326 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:34] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:35,043 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:35] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:35,447 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D736CF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:28:35,734 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:35] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:37,037 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:37] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:37,727 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:37] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:39,042 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:39] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:39,555 - ERROR - Error taking screenshot: HTTPConnectionPool(host='localhost', port=49472): Max retries exceeded with url: /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D737020>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-12-25 21:28:39,729 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:39] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:41,047 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:41] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:41,730 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:41] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:43,038 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:43] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:43,061 - INFO - CREATING NEW IMAGE POST WITH STOCK PHOTO
+2025-12-25 21:28:43,062 - INFO - Fetching stock image from API...
+2025-12-25 21:28:43,062 - INFO - Fetching Pexels image for: flowers
+2025-12-25 21:28:43,621 - INFO - Found image by Pixabay: Colorful spring meadow with pink flowers against majestic snowcapped mountains and clear blue sky.
+2025-12-25 21:28:43,730 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:43] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:44,195 - INFO - Image downloaded: temp_images\pexels_1766680124.jpg
+2025-12-25 21:28:44,197 - INFO - Image downloaded to temp_images\pexels_1766680124.jpg
+2025-12-25 21:28:44,197 - INFO - Caption: Colorful spring meadow with pink flowers against majestic snowcapped mountains and clear blue sky.
+Photo by Pixabay
+2025-12-25 21:28:45,040 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:45] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:45,733 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:45] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:47,039 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:47] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:48,287 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D468160>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:48,326 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:48] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:49,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:49] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:50,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:50] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:51,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:51] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:52,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:52] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:52,362 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D737790>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:53,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:53] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:54,318 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:54] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:55,623 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:55] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:56,333 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:56] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:56,432 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D7379B0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync
+2025-12-25 21:28:57,632 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:57] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:58,323 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:58] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:28:59,627 - INFO - 127.0.0.1 - - [25/Dec/2025 21:28:59] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:00,318 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:00] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:00,547 - ERROR - Error creating image post: HTTPConnectionPool(host='localhost', port=49472): Max retries exceeded with url: /session/ff6d5eeb87e37cdc2882155199d5f51a/execute/sync (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D737AC0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-12-25 21:29:01,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:01] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:02,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:02] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:03,623 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:03] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:04,326 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:04] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:04,637 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D736BE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:29:05,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:05] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:06,334 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:07,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:07] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:08,329 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:08,728 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D737020>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:29:09,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:09] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:10,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:11,647 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:11] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:12,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:12,805 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D736CF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot
+2025-12-25 21:29:13,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:13] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:14,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:15,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:15] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:16,315 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:16,906 - ERROR - Error taking screenshot: HTTPConnectionPool(host='localhost', port=49472): Max retries exceeded with url: /session/ff6d5eeb87e37cdc2882155199d5f51a/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D7369C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-12-25 21:29:16,907 - INFO - Closing browser...
+2025-12-25 21:29:17,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:17] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:18,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:19,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:19] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:20,329 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:20,953 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D7367A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a
+2025-12-25 21:29:21,626 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:21] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:22,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:23,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:23] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:24,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:25,041 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D736580>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a
+2025-12-25 21:29:25,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:25] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:26,329 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:27,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:27] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:28,329 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:29,087 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000018F5D736360>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/ff6d5eeb87e37cdc2882155199d5f51a
+2025-12-25 21:29:29,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:29] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:30,330 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:31,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:32,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:32] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:33,627 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:33] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:34,002 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:34] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:35,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:35] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:36,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:36] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:37,246 - INFO - Browser closed successfully
+2025-12-25 21:29:37,247 - INFO - Cleaned up temporary images
+2025-12-25 21:29:37,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:37] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:38,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:38] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:39,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:39] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:40,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:40] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:41,637 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:41] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:42,333 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:42] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:43,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:43] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:44,317 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:44] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:45,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:45] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:46,317 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:46] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:47,642 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:47] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:48,333 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:48] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:49,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:49] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:50,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:50] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:51,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:51] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:52,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:52] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:53,633 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:53] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:54,321 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:54] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:55,650 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:55] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:56,326 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:56] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:57,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:57] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:58,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:58] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:29:59,652 - INFO - 127.0.0.1 - - [25/Dec/2025 21:29:59] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:00,320 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:00] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:01,639 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:01] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:02,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:02] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:03,629 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:03] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:04,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:04] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:05,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:05] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:06,333 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:07,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:07] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:08,330 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:08] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:09,631 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:09] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:10,323 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:10] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:11,634 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:11] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:12,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:12] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:13,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:13] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:14,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:14] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:15,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:15] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:16,324 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:16] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:17,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:17] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:18,332 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:18] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:19,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:19] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:20,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:20] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:21,638 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:21] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:22,315 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:22] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:23,626 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:23] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:24,319 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:24] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:25,628 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:25] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:26,322 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:26] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:27,630 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:27] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:28,318 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:28] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:29,625 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:29] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:30,316 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:30] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:31,632 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:31] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:32,325 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:32] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:30:33,635 - INFO - 127.0.0.1 - - [25/Dec/2025 21:30:33] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:31:06,328 - INFO - 127.0.0.1 - - [25/Dec/2025 21:31:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:32:06,630 - INFO - 127.0.0.1 - - [25/Dec/2025 21:32:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:33:06,340 - INFO - 127.0.0.1 - - [25/Dec/2025 21:33:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:34:06,636 - INFO - 127.0.0.1 - - [25/Dec/2025 21:34:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:35:06,342 - INFO - 127.0.0.1 - - [25/Dec/2025 21:35:06] "GET /api/status HTTP/1.1" 200 -
+2025-12-25 21:35:52,939 - INFO -  * Detected change in 'C:\\Users\\ABC\\Downloads\\fb_warmup_app (1)\\fb_warmup_app\\app.py', reloading

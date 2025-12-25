@@ -1,0 +1,245 @@
+========================================
+FACEBOOK WARMUP BOT - SCHEDULING SETUP
+========================================
+
+Follow these steps to set up automatic scheduling:
+
+STEP 1: START THE APPLICATION
+==============================
+[ ] Run: python app.py
+[ ] Verify you see: "[SCHEDULER] Scheduler started"
+[ ] Open browser: http://localhost:5000
+
+
+STEP 2: TEST THE SCHEDULER
+===========================
+[ ] Run: python test_scheduler.py
+[ ] Verify all 8 tests pass
+[ ] If any fail, check the error messages
+
+
+STEP 3: CREATE YOUR FIRST SCHEDULE
+===================================
+Choose one method:
+
+METHOD A - Using cURL:
+[ ] curl -X POST http://localhost:5000/api/schedules \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test Daily","profiles":["Profile 1"],"loops":1,"schedule_type":"daily","schedule_time":"09:00","enabled":true}'
+
+METHOD B - Using Python:
+[ ] import requests
+[ ] requests.post('http://localhost:5000/api/schedules', json={
+      "name": "Test Daily",
+      "profiles": ["Profile 1"],
+      "loops": 1,
+      "schedule_type": "daily",
+      "schedule_time": "09:00",
+      "enabled": True
+    })
+
+METHOD C - Using Helper Script:
+[ ] Edit schedule_manager.py
+[ ] Uncomment the example code
+[ ] Run: python schedule_manager.py
+
+
+STEP 4: VERIFY YOUR SCHEDULE
+=============================
+[ ] curl http://localhost:5000/api/schedules
+[ ] Check that your schedule appears in the list
+[ ] Verify "next_run" shows the correct time
+[ ] Verify "enabled" is true
+
+
+STEP 5: TEST MANUAL TRIGGER
+============================
+[ ] curl -X POST http://localhost:5000/api/schedules/1/run-now
+[ ] Open dashboard: http://localhost:5000
+[ ] Watch the bot run
+[ ] Verify all tasks complete successfully
+
+
+STEP 6: PLAN YOUR SCHEDULE STRATEGY
+====================================
+Choose your approach:
+
+OPTION A - Daily at Fixed Times:
+[ ] Morning (9 AM)
+[ ] Afternoon (2 PM)
+[ ] Evening (7 PM)
+
+OPTION B - Business Hours Only:
+[ ] Monday-Friday only
+[ ] 3 times per day
+[ ] Avoid weekends
+
+OPTION C - Continuous Intervals:
+[ ] Every 3-4 hours
+[ ] Round the clock
+[ ] All 7 days
+
+OPTION D - Mixed Strategy:
+[ ] Different schedules for different profiles
+[ ] Staggered times
+[ ] Customized per profile
+
+
+STEP 7: CREATE PRODUCTION SCHEDULES
+====================================
+Based on your strategy, create schedules:
+
+For Daily Schedules:
+[ ] Name: Descriptive name
+[ ] Profiles: List your profile names
+[ ] Type: "daily"
+[ ] Time: HH:MM (24-hour format)
+[ ] Enabled: true
+
+For Weekly Schedules:
+[ ] Name: Descriptive name
+[ ] Profiles: List your profile names
+[ ] Type: "weekly"
+[ ] Time: HH:MM
+[ ] Days: [0,1,2,3,4] for Mon-Fri
+[ ] Enabled: true
+
+For Interval Schedules:
+[ ] Name: Descriptive name
+[ ] Profiles: List your profile names
+[ ] Type: "interval"
+[ ] Interval: Number + "hours" or "minutes"
+[ ] Enabled: true
+
+
+STEP 8: MONITOR FIRST 24 HOURS
+===============================
+[ ] Check schedules: curl http://localhost:5000/api/schedules
+[ ] Verify next_run times are correct
+[ ] Watch the first scheduled execution
+[ ] Check logs for any errors
+[ ] Verify all profiles run successfully
+
+
+STEP 9: FINE-TUNE AS NEEDED
+============================
+[ ] Adjust timing if needed
+[ ] Add/remove profiles from schedules
+[ ] Change intervals based on results
+[ ] Enable/disable schedules as needed
+
+
+STEP 10: REGULAR MAINTENANCE
+=============================
+Weekly:
+[ ] Review schedule performance
+[ ] Check run counts
+[ ] Look for any failures
+
+Monthly:
+[ ] Clean up unused schedules
+[ ] Update timing if needed
+[ ] Verify profiles are still active
+
+
+========================================
+QUICK REFERENCE
+========================================
+
+List all schedules:
+curl http://localhost:5000/api/schedules
+
+Get specific schedule:
+curl http://localhost:5000/api/schedules/1
+
+Run schedule now:
+curl -X POST http://localhost:5000/api/schedules/1/run-now
+
+Disable schedule:
+curl -X POST http://localhost:5000/api/schedules/1/toggle -H "Content-Type: application/json" -d '{"enabled":false}'
+
+Delete schedule:
+curl -X DELETE http://localhost:5000/api/schedules/1
+
+Check bot status:
+curl http://localhost:5000/api/status
+
+
+========================================
+IMPORTANT REMINDERS
+========================================
+
+✓ Time format: Use 24-hour format (09:00, not 9:00 AM)
+✓ Weekdays: 0=Monday, 6=Sunday
+✓ Profiles: Must match exact profile names
+✓ Next run: Check this to verify timing
+✓ Persistence: Schedules survive app restarts
+✓ One-time: Auto-disables after running
+✓ Conflicts: Multiple schedules at same time run sequentially
+
+
+========================================
+TROUBLESHOOTING
+========================================
+
+Schedule not running?
+→ Check enabled status
+→ Verify next_run is in future
+→ Ensure profile names match
+
+Wrong timing?
+→ Use 24-hour format
+→ Check system time
+→ Verify weekday numbers
+
+Need help?
+→ Read SCHEDULING_GUIDE.md
+→ Run test_scheduler.py
+→ Check app console
+
+
+========================================
+DOCUMENTATION FILES
+========================================
+
+README_SCHEDULING.md         - Overview and quick start
+SCHEDULING_GUIDE.md          - Complete detailed guide
+QUICK_START_SCHEDULING.md    - Quick reference examples
+SCHEDULING_SUMMARY.md        - Technical implementation details
+schedule_manager.py          - Python helper script
+test_scheduler.py            - Automated test suite
+
+
+========================================
+SUCCESS CRITERIA
+========================================
+
+You're done when:
+[ ] All tests pass (test_scheduler.py)
+[ ] At least one schedule created
+[ ] Manual trigger works
+[ ] First scheduled run succeeds
+[ ] Next run time calculates correctly
+[ ] Schedules persist after restart
+
+
+========================================
+NEXT STEPS
+========================================
+
+After setup is complete:
+1. Monitor for 24-48 hours
+2. Adjust schedules based on needs
+3. Add more profiles as needed
+4. Optimize timing for best results
+5. Set it and forget it!
+
+
+========================================
+Need more help?
+
+See the documentation files listed above
+or check the examples in the .md files.
+
+Happy scheduling!
+========================================

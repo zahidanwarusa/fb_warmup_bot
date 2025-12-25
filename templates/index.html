@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -27,7 +27,7 @@
         header {
             text-align: center;
             padding: 30px 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         header h1 {
@@ -42,6 +42,43 @@
         header p {
             color: #8892b0;
             font-size: 1.1rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: transparent;
+            border: none;
+            color: #8892b0;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #4facfe;
+        }
+
+        .tab.active {
+            color: #4facfe;
+            border-bottom-color: #4facfe;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .main-grid {
@@ -89,7 +126,7 @@
             font-size: 0.9rem;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -100,10 +137,44 @@
             transition: all 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #4facfe;
             box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+        }
+
+        .form-group select option {
+            background: #16213e;
+            color: #fff;
+        }
+
+        /* Multi-checkbox for weekdays */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox-group label:hover {
+            background: rgba(79, 172, 254, 0.1);
+            border-color: #4facfe;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
         }
 
         /* Button Styles */
@@ -172,6 +243,11 @@
         .btn-full {
             width: 100%;
             justify-content: center;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
         }
 
         /* Profile List */
@@ -283,6 +359,83 @@
         .status-failed {
             background: rgba(235, 51, 73, 0.2);
             color: #eb3349;
+        }
+
+        /* Schedule Item */
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .schedule-item:hover {
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+
+        .schedule-item.disabled {
+            opacity: 0.6;
+        }
+
+        .schedule-toggle {
+            width: 40px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 15px;
+        }
+
+        .schedule-toggle.enabled {
+            background: #38ef7d;
+        }
+
+        .schedule-toggle::after {
+            content: '';
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+
+        .schedule-toggle.enabled::after {
+            left: 20px;
+        }
+
+        .schedule-info {
+            flex: 1;
+        }
+
+        .schedule-name {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .schedule-details {
+            font-size: 0.85rem;
+            color: #8892b0;
+        }
+
+        .schedule-next-run {
+            font-size: 0.75rem;
+            color: #4facfe;
+            margin-top: 3px;
+        }
+
+        .schedule-actions {
+            display: flex;
+            gap: 8px;
         }
 
         /* Controls */
@@ -419,13 +572,13 @@
         }
 
         .status-dot.idle { background: #5a6a8a; }
-        .status-dot.running { 
-            background: #4facfe; 
+        .status-dot.running {
+            background: #4facfe;
             animation: pulse 1.5s infinite;
         }
         .status-dot.completed { background: #38ef7d; }
         .status-dot.error { background: #eb3349; }
-        .status-dot.delaying { 
+        .status-dot.delaying {
             background: #f5a623;
             animation: pulse 1.5s infinite;
         }
@@ -756,6 +909,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Schedule List */
+        .schedule-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -769,156 +928,259 @@
     <div class="container">
         <header>
             <h1>Facebook Warmup Bot</h1>
-            <p>Manage multiple Edge profiles and run warmup tasks sequentially</p>
+            <p>Manage profiles, run warmup tasks, and schedule automation</p>
         </header>
 
-        <div class="main-grid">
-            <!-- Left Column: Profile Management -->
-            <div>
-                <!-- Add Profile Card -->
-                <div class="card" style="margin-bottom: 20px;">
-                    <h2><span class="icon">+</span> Add New Profile</h2>
-                    <form id="addProfileForm">
-                        <div class="form-group">
-                            <label>Profile Name</label>
-                            <input type="text" id="profileName" placeholder="e.g., Account 1" required>
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('manual')">Manual Run</button>
+            <button class="tab" onclick="switchTab('schedules')">Schedules</button>
+        </div>
+
+        <!-- Manual Run Tab -->
+        <div id="manualTab" class="tab-content active">
+            <div class="main-grid">
+                <!-- Left Column: Profile Management -->
+                <div>
+                    <!-- Add Profile Card -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h2><span class="icon">+</span> Add New Profile</h2>
+                        <form id="addProfileForm">
+                            <div class="form-group">
+                                <label>Profile Name</label>
+                                <input type="text" id="profileName" placeholder="e.g., Account 1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Edge Profile Path</label>
+                                <input type="text" id="profilePath" placeholder="C:\Users\ABC\AppData\Local\Microsoft\Edge\User Data" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Add Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Profiles List Card -->
+                    <div class="card">
+                        <h2><span class="icon">&#9776;</span> Profiles</h2>
+
+                        <div class="select-all">
+                            <input type="checkbox" id="selectAll" class="profile-checkbox">
+                            <label for="selectAll">Select All Profiles</label>
                         </div>
-                        <div class="form-group">
-                            <label>Edge Profile Path</label>
-                            <input type="text" id="profilePath" placeholder="C:\Users\ABC\AppData\Local\Microsoft\Edge\User Data" required>
+
+                        <div class="profile-list" id="profileList">
+                            <div class="empty-state">
+                                <span class="icon-large">[ ]</span>
+                                <p>No profiles added yet.<br>Add your first profile above.</p>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Add Profile</button>
-                    </form>
+
+                        <div class="controls">
+                            <div class="controls-row">
+                                <div class="loop-input-group">
+                                    <label for="loopCount">Warmup Rounds</label>
+                                    <input type="number" id="loopCount" value="1" min="1" max="100">
+                                </div>
+
+                                <!-- Delay Input -->
+                                <div class="delay-input-group">
+                                    <label for="loopDelay">
+                                        <span>⏱️ Loop Delay</span>
+                                    </label>
+                                    <div class="delay-input-wrapper">
+                                        <input type="number" id="loopDelayValue" value="0" min="0" max="9999" placeholder="0">
+                                        <select id="loopDelayUnit">
+                                            <option value="minutes">Min</option>
+                                            <option value="hours">Hours</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="controls-row">
+                                <button class="btn btn-success" id="runBtn" onclick="runBot()">
+                                    &#9654; Run Selected
+                                </button>
+                                <button class="btn btn-danger" id="stopBtn" onclick="stopBot()" disabled>
+                                    &#9632; Stop
+                                </button>
+                                <button class="btn btn-secondary" id="resetBtn" onclick="resetStatus()">
+                                    &#8635; Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Profiles List Card -->
-                <div class="card">
-                    <h2><span class="icon">&#9776;</span> Profiles</h2>
-                    
-                    <div class="select-all">
-                        <input type="checkbox" id="selectAll" class="profile-checkbox">
-                        <label for="selectAll">Select All Profiles</label>
-                    </div>
+                <!-- Right Column: Status & Logs -->
+                <div>
+                    <!-- Status Card -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h2><span class="icon">&#9881;</span> Status</h2>
 
-                    <div class="profile-list" id="profileList">
-                        <div class="empty-state">
-                            <span class="icon-large">[ ]</span>
-                            <p>No profiles added yet.<br>Add your first profile above.</p>
+                        <div class="status-header">
+                            <div class="status-indicator">
+                                <div class="status-dot" id="statusDot"></div>
+                                <span id="statusText">Idle</span>
+                            </div>
+                        </div>
+
+                        <div class="current-task" id="currentTaskPanel" style="display: none;">
+                            <h4>Current Task</h4>
+                            <p id="currentTask">-</p>
+                        </div>
+
+                        <!-- NEW: Delay Indicator -->
+                        <div class="delay-indicator" id="delayPanel" style="display: none;">
+                            <h4>⏳ Waiting Between Rounds</h4>
+                            <div class="countdown" id="delayCountdown">0m 0s</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="delayProgressBar" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Queue Section -->
+                        <div class="queue-section" id="queueSection" style="display: none;">
+                            <h3>📋 Queue Progress</h3>
+                            <div class="queue-progress">
+                                <div class="queue-progress-bar" id="queueProgressBar" style="width: 0%"></div>
+                            </div>
+                            <div class="queue-stats" id="queueStats">
+                                <span class="queue-stat pending">Pending: 0</span>
+                                <span class="queue-stat completed">Completed: 0</span>
+                                <span class="queue-stat failed">Failed: 0</span>
+                            </div>
+                            <div class="queue-list" id="queueList">
+                                <!-- Queue items will be populated here -->
+                            </div>
+                        </div>
+
+                        <div id="taskProgress">
+                            <h4 style="color: #a8b2d1; margin-bottom: 10px; font-size: 0.9rem;">Tasks</h4>
+                            <div class="task-list">
+                                <div class="task-item pending"><span class="task-icon">○</span> Browser Setup</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Navigation</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Login Check</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Feed Access</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Browse Feed</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Visit Profile</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Watch Story</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Like Post</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Comment</div>
+                                <div class="task-item pending"><span class="task-icon">○</span> Image Post</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="controls">
-                        <div class="controls-row">
-                            <div class="loop-input-group">
-                                <label for="loopCount">Warmup Rounds</label>
-                                <input type="number" id="loopCount" value="1" min="1" max="100">
-                            </div>
-                            
-                            <!-- Delay Input -->
-                            <div class="delay-input-group">
-                                <label for="loopDelay">
-                                    <span>⏱️ Loop Delay</span>
-                                </label>
-                                <div class="delay-input-wrapper">
-                                    <input type="number" id="loopDelayValue" value="0" min="0" max="9999" placeholder="0">
-                                    <select id="loopDelayUnit">
-                                        <option value="minutes">Min</option>
-                                        <option value="hours">Hours</option>
-                                    </select>
-                                </div>
-                                <!-- <span class="delay-hint">Delay between rounds</span> -->
+                    <!-- Logs Card -->
+                    <div class="card">
+                        <div class="logs-header">
+                            <h2><span class="icon">&#128196;</span> Logs</h2>
+                            <div class="logs-actions">
+                                <button class="btn-small" onclick="copyLogs()">Copy Logs</button>
+                                <button class="btn-small" onclick="clearLogs()">Clear</button>
                             </div>
                         </div>
-                        
-                        <div class="controls-row">
-                            <button class="btn btn-success" id="runBtn" onclick="runBot()">
-                                &#9654; Run Selected
-                            </button>
-                            <button class="btn btn-danger" id="stopBtn" onclick="stopBot()" disabled>
-                                &#9632; Stop
-                            </button>
-                            <button class="btn btn-secondary" id="resetBtn" onclick="resetStatus()">
-                                &#8635; Reset
-                            </button>
+                        <div class="log-console" id="logConsole">
+                            <div class="log-entry info">Ready to start...</div>
+                        </div>
+                        <div class="copy-notification" id="copyNotification">
+                            ✓ Logs copied to clipboard!
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Right Column: Status & Logs -->
-            <div>
-                <!-- Status Card -->
-                <div class="card" style="margin-bottom: 20px;">
-                    <h2><span class="icon">&#9881;</span> Status</h2>
-                    
-                    <div class="status-header">
-                        <div class="status-indicator">
-                            <div class="status-dot" id="statusDot"></div>
-                            <span id="statusText">Idle</span>
-                        </div>
-                    </div>
+        <!-- Schedules Tab -->
+        <div id="schedulesTab" class="tab-content">
+            <div class="main-grid">
+                <!-- Left Column: Add Schedule -->
+                <div>
+                    <div class="card">
+                        <h2><span class="icon">⏰</span> Create Schedule</h2>
+                        <form id="addScheduleForm">
+                            <div class="form-group">
+                                <label>Schedule Name</label>
+                                <input type="text" id="scheduleName" placeholder="e.g., Daily Morning Warmup" required>
+                            </div>
 
-                    <div class="current-task" id="currentTaskPanel" style="display: none;">
-                        <h4>Current Task</h4>
-                        <p id="currentTask">-</p>
-                    </div>
+                            <div class="form-group">
+                                <label>Select Profiles</label>
+                                <div id="scheduleProfilesList" style="max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                                    <!-- Will be populated with checkboxes -->
+                                </div>
+                            </div>
 
-                    <!-- NEW: Delay Indicator -->
-                    <div class="delay-indicator" id="delayPanel" style="display: none;">
-                        <h4>⏳ Waiting Between Rounds</h4>
-                        <div class="countdown" id="delayCountdown">0m 0s</div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="delayProgressBar" style="width: 100%"></div>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label>Schedule Type</label>
+                                <select id="scheduleType" onchange="updateScheduleFields()">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="interval">Interval</option>
+                                    <option value="once">Once</option>
+                                </select>
+                            </div>
 
-                    <!-- Queue Section -->
-                    <div class="queue-section" id="queueSection" style="display: none;">
-                        <h3>📋 Queue Progress</h3>
-                        <div class="queue-progress">
-                            <div class="queue-progress-bar" id="queueProgressBar" style="width: 0%"></div>
-                        </div>
-                        <div class="queue-stats" id="queueStats">
-                            <span class="queue-stat pending">Pending: 0</span>
-                            <span class="queue-stat completed">Completed: 0</span>
-                            <span class="queue-stat failed">Failed: 0</span>
-                        </div>
-                        <div class="queue-list" id="queueList">
-                            <!-- Queue items will be populated here -->
-                        </div>
-                    </div>
+                            <div class="form-group" id="scheduleTimeGroup">
+                                <label>Time (24-hour format)</label>
+                                <input type="time" id="scheduleTime" value="09:00">
+                            </div>
 
-                    <div id="taskProgress">
-                        <h4 style="color: #a8b2d1; margin-bottom: 10px; font-size: 0.9rem;">Tasks</h4>
-                        <div class="task-list">
-                            <div class="task-item pending"><span class="task-icon">○</span> Browser Setup</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Navigation</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Login Check</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Feed Access</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Browse Feed</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Visit Profile</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Watch Story</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Like Post</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Comment</div>
-                            <div class="task-item pending"><span class="task-icon">○</span> Image Post</div>
-                        </div>
+                            <div class="form-group" id="scheduleDaysGroup" style="display: none;">
+                                <label>Days of Week</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" value="0"> Mon</label>
+                                    <label><input type="checkbox" value="1"> Tue</label>
+                                    <label><input type="checkbox" value="2"> Wed</label>
+                                    <label><input type="checkbox" value="3"> Thu</label>
+                                    <label><input type="checkbox" value="4"> Fri</label>
+                                    <label><input type="checkbox" value="5"> Sat</label>
+                                    <label><input type="checkbox" value="6"> Sun</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="scheduleIntervalGroup" style="display: none;">
+                                <label>Interval</label>
+                                <div class="delay-input-wrapper">
+                                    <input type="number" id="intervalValue" value="60" min="1" max="9999">
+                                    <select id="intervalUnit">
+                                        <option value="minutes">Minutes</option>
+                                        <option value="hours">Hours</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Warmup Rounds</label>
+                                <input type="number" id="scheduleLoops" value="1" min="1" max="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Loop Delay</label>
+                                <div class="delay-input-wrapper">
+                                    <input type="number" id="scheduleDelayValue" value="0" min="0" max="9999">
+                                    <select id="scheduleDelayUnit">
+                                        <option value="minutes">Minutes</option>
+                                        <option value="hours">Hours</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">Create Schedule</button>
+                        </form>
                     </div>
                 </div>
 
-                <!-- Logs Card -->
-                <div class="card">
-                    <div class="logs-header">
-                        <h2><span class="icon">&#128196;</span> Logs</h2>
-                        <div class="logs-actions">
-                            <button class="btn-small" onclick="copyLogs()">Copy Logs</button>
-                            <button class="btn-small" onclick="clearLogs()">Clear</button>
+                <!-- Right Column: Schedules List -->
+                <div>
+                    <div class="card">
+                        <h2><span class="icon">📅</span> Active Schedules</h2>
+                        <div class="schedule-list" id="scheduleList">
+                            <div class="empty-state">
+                                <span class="icon-large">⏰</span>
+                                <p>No schedules created yet.<br>Create your first schedule.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="log-console" id="logConsole">
-                        <div class="log-entry info">Ready to start...</div>
-                    </div>
-                    <div class="copy-notification" id="copyNotification">
-                        ✓ Logs copied to clipboard!
                     </div>
                 </div>
             </div>
@@ -929,469 +1191,6 @@
         </footer>
     </div>
 
-    <script>
-        const API_URL = window.location.origin;
-        let statusInterval = null;
-        let lastDelayRemaining = 0;
-        let totalDelaySeconds = 0;
-
-        // Load profiles on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProfiles();
-            startStatusPolling();
-        });
-
-        // Load profiles from server
-        async function loadProfiles() {
-            try {
-                const response = await fetch(`${API_URL}/api/profiles`);
-                const profiles = await response.json();
-                
-                const profileList = document.getElementById('profileList');
-                
-                if (profiles.length === 0) {
-                    profileList.innerHTML = `
-                        <div class="empty-state">
-                            <span class="icon-large">[ ]</span>
-                            <p>No profiles added yet.<br>Add your first profile above.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                profileList.innerHTML = profiles.map(profile => `
-                    <div class="profile-item" data-id="${profile.id}" data-name="${profile.name}">
-                        <input type="checkbox" class="profile-checkbox" value="${profile.name}">
-                        <div class="profile-info">
-                            <div class="profile-name">${profile.name}</div>
-                            <div class="profile-path">${profile.path}</div>
-                        </div>
-                        <div class="profile-actions">
-                            <button class="btn-edit" onclick="editProfile(${profile.id})">Edit</button>
-                            <button class="btn-delete" onclick="deleteProfile(${profile.id})">Delete</button>
-                        </div>
-                    </div>
-                `).join('');
-
-                updateSelectAll();
-            } catch (error) {
-                console.error('Error loading profiles:', error);
-            }
-        }
-
-        // Add profile
-        document.getElementById('addProfileForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('profileName').value.trim();
-            const path = document.getElementById('profilePath').value.trim();
-            
-            if (!name || !path) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/api/profiles`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, path })
-                });
-
-                const data = await response.json();
-                
-                if (response.ok) {
-                    document.getElementById('profileName').value = '';
-                    document.getElementById('profilePath').value = '';
-                    loadProfiles();
-                    addLog(`Profile added: ${name}`, 'success');
-                } else {
-                    alert(data.error || 'Failed to add profile');
-                }
-            } catch (error) {
-                console.error('Error adding profile:', error);
-                alert('Failed to connect to server');
-            }
-        });
-
-        // Delete profile
-        async function deleteProfile(id) {
-            if (!confirm('Are you sure you want to delete this profile?')) return;
-            
-            try {
-                await fetch(`${API_URL}/api/profiles/${id}`, { method: 'DELETE' });
-                loadProfiles();
-                addLog('Profile deleted', 'info');
-            } catch (error) {
-                console.error('Error deleting profile:', error);
-            }
-        }
-
-        // Edit profile
-        async function editProfile(id) {
-            const item = document.querySelector(`[data-id="${id}"]`);
-            const currentName = item.querySelector('.profile-name').textContent;
-            const currentPath = item.querySelector('.profile-path').textContent;
-            
-            const newName = prompt('Enter new profile name:', currentName);
-            if (newName === null) return;
-            
-            const newPath = prompt('Enter new profile path:', currentPath);
-            if (newPath === null) return;
-            
-            try {
-                await fetch(`${API_URL}/api/profiles/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: newName, path: newPath })
-                });
-                loadProfiles();
-                addLog('Profile updated', 'info');
-            } catch (error) {
-                console.error('Error updating profile:', error);
-            }
-        }
-
-        // Select All checkbox handler
-        document.getElementById('selectAll').addEventListener('change', async (e) => {
-            if (e.target.checked) {
-                try {
-                    const statusResponse = await fetch(`${API_URL}/api/status`);
-                    const status = await statusResponse.json();
-                    
-                    if (status.completed.length > 0 || status.failed.length > 0) {
-                        await fetch(`${API_URL}/api/reset`, { method: 'POST' });
-                        await loadProfiles();
-                        
-                        setTimeout(() => {
-                            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
-                            checkboxes.forEach(cb => cb.checked = true);
-                            document.getElementById('selectAll').checked = true;
-                            document.getElementById('runBtn').disabled = false;
-                            document.getElementById('stopBtn').disabled = true;
-                        }, 100);
-                        
-                        const logConsole = document.getElementById('logConsole');
-                        logConsole.innerHTML = '<div class="log-entry info">Status auto-reset. All profiles ready for new run.</div>';
-                        
-                        // Hide queue section
-                        document.getElementById('queueSection').style.display = 'none';
-                        document.getElementById('delayPanel').style.display = 'none';
-                        
-                        addLog('Status auto-reset. All profiles selected and ready.', 'info');
-                        return;
-                    }
-                } catch (error) {
-                    console.error('Error checking status:', error);
-                }
-            }
-            
-            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
-            checkboxes.forEach(cb => cb.checked = e.target.checked);
-        });
-
-        function updateSelectAll() {
-            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox');
-            const selectAll = document.getElementById('selectAll');
-            
-            if (checkboxes.length === 0) {
-                selectAll.checked = false;
-                return;
-            }
-            
-            selectAll.checked = Array.from(checkboxes).every(cb => cb.checked);
-        }
-
-        document.getElementById('profileList').addEventListener('change', (e) => {
-            if (e.target.classList.contains('profile-checkbox')) {
-                updateSelectAll();
-            }
-        });
-
-        // Run Bot
-        async function runBot() {
-            const checkboxes = document.querySelectorAll('.profile-item .profile-checkbox:checked');
-            const selectedProfiles = Array.from(checkboxes).map(cb => cb.value);
-            const loopCount = parseInt(document.getElementById('loopCount').value) || 1;
-            const loopDelayValue = parseInt(document.getElementById('loopDelayValue').value) || 0;
-            const loopDelayUnit = document.getElementById('loopDelayUnit').value;
-
-            if (selectedProfiles.length === 0) {
-                alert('Please select at least one profile');
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/api/run`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        profiles: selectedProfiles,
-                        loops: loopCount,
-                        loop_delay_value: loopDelayValue,
-                        loop_delay_unit: loopDelayUnit
-                    })
-                });
-
-                const data = await response.json();
-                
-                if (response.ok) {
-                    document.getElementById('runBtn').disabled = true;
-                    document.getElementById('stopBtn').disabled = false;
-                    document.getElementById('queueSection').style.display = 'block';
-                    
-                    // Store total delay for progress calculation
-                    if (loopDelayUnit === 'hours') {
-                        totalDelaySeconds = loopDelayValue * 3600;
-                    } else {
-                        totalDelaySeconds = loopDelayValue * 60;
-                    }
-                    
-                    addLog(`Started queue: ${selectedProfiles.length} profile(s) x ${loopCount} round(s)`, 'success');
-                } else {
-                    alert(data.error || 'Failed to start bot');
-                }
-            } catch (error) {
-                console.error('Error running bot:', error);
-                alert('Failed to connect to server');
-            }
-        }
-
-        // Stop Bot
-        async function stopBot() {
-            try {
-                await fetch(`${API_URL}/api/stop`, { method: 'POST' });
-                addLog('Stop requested - will stop after current task', 'error');
-            } catch (error) {
-                console.error('Error stopping bot:', error);
-            }
-        }
-
-        // Reset Status
-        async function resetStatus() {
-            try {
-                const response = await fetch(`${API_URL}/api/reset`, { method: 'POST' });
-                const data = await response.json();
-                
-                if (response.ok) {
-                    loadProfiles();
-                    document.getElementById('runBtn').disabled = false;
-                    document.getElementById('stopBtn').disabled = true;
-                    document.getElementById('queueSection').style.display = 'none';
-                    document.getElementById('delayPanel').style.display = 'none';
-                    
-                    const logConsole = document.getElementById('logConsole');
-                    logConsole.innerHTML = '<div class="log-entry info">Ready to start...</div>';
-                    
-                    addLog('Status reset', 'info');
-                } else {
-                    alert(data.error || 'Failed to reset');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        // Start polling for status updates
-        function startStatusPolling() {
-            if (statusInterval) clearInterval(statusInterval);
-            statusInterval = setInterval(updateStatus, 1000);
-        }
-
-        // Format time helper
-        function formatTime(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            const secs = Math.floor(seconds % 60);
-            
-            if (hours > 0) {
-                return `${hours}h ${minutes}m ${secs}s`;
-            } else if (minutes > 0) {
-                return `${minutes}m ${secs}s`;
-            } else {
-                return `${secs}s`;
-            }
-        }
-
-        // Update status from server
-        async function updateStatus() {
-            try {
-                const response = await fetch(`${API_URL}/api/status`);
-                const status = await response.json();
-
-                // Update status indicator
-                const statusDot = document.getElementById('statusDot');
-                const statusText = document.getElementById('statusText');
-                
-                statusDot.className = 'status-dot';
-                
-                // Handle delay state
-                if (status.is_delaying) {
-                    statusDot.classList.add('delaying');
-                    statusText.textContent = `Waiting between rounds (${formatTime(status.delay_remaining)})`;
-                    document.getElementById('delayPanel').style.display = 'block';
-                    document.getElementById('currentTaskPanel').style.display = 'none';
-                    
-                    // Update countdown
-                    document.getElementById('delayCountdown').textContent = formatTime(status.delay_remaining);
-                    
-                    // Update progress bar
-                    if (totalDelaySeconds > 0) {
-                        const progress = ((totalDelaySeconds - status.delay_remaining) / totalDelaySeconds) * 100;
-                        document.getElementById('delayProgressBar').style.width = `${progress}%`;
-                    }
-                } else {
-                    document.getElementById('delayPanel').style.display = 'none';
-                    
-                    if (status.running) {
-                        statusDot.classList.add('running');
-                        statusText.textContent = `Running: ${status.current_profile || '...'} (Round ${status.current_round || 1})`;
-                        document.getElementById('runBtn').disabled = true;
-                        document.getElementById('stopBtn').disabled = false;
-                    } else {
-                        const completedCount = status.queue.filter(q => q.status === 'completed').length;
-                        const failedCount = status.queue.filter(q => q.status === 'failed').length;
-                        
-                        if (completedCount > 0 || failedCount > 0) {
-                            statusDot.classList.add('completed');
-                            statusText.textContent = `Done (${completedCount} success, ${failedCount} failed)`;
-                        } else {
-                            statusDot.classList.add('idle');
-                            statusText.textContent = 'Idle';
-                        }
-                        document.getElementById('runBtn').disabled = false;
-                        document.getElementById('stopBtn').disabled = true;
-                    }
-                }
-
-                // Update current task panel
-                const taskPanel = document.getElementById('currentTaskPanel');
-                const currentTask = document.getElementById('currentTask');
-                
-                if (status.running && status.current_task && !status.is_delaying) {
-                    taskPanel.style.display = 'block';
-                    currentTask.textContent = status.current_task;
-                } else {
-                    taskPanel.style.display = 'none';
-                }
-
-                // Update queue display
-                if (status.queue && status.queue.length > 0) {
-                    document.getElementById('queueSection').style.display = 'block';
-                    updateQueueDisplay(status.queue, status.current_queue_index);
-                }
-
-                // Update profile list status
-                const profileItems = document.querySelectorAll('.profile-item');
-                profileItems.forEach(item => {
-                    const name = item.dataset.name;
-                    item.classList.remove('running', 'completed', 'failed');
-                    
-                    const oldBadge = item.querySelector('.profile-status');
-                    if (oldBadge) oldBadge.remove();
-
-                    if (status.current_profile === name && status.running) {
-                        item.classList.add('running');
-                        item.querySelector('.profile-info').innerHTML += 
-                            `<span class="profile-status status-running">Running (R${status.current_round || 1})</span>`;
-                    }
-                });
-
-                // Update logs
-                if (status.logs && status.logs.length > 0) {
-                    const logConsole = document.getElementById('logConsole');
-                    logConsole.innerHTML = status.logs.map(log => {
-                        let className = '';
-                        if (log.includes('SUCCESS')) className = 'success';
-                        else if (log.includes('ERROR') || log.includes('FAILED')) className = 'error';
-                        else if (log.includes('STARTING') || log.includes('===') || log.includes('INFO')) className = 'info';
-                        
-                        return `<div class="log-entry ${className}">${log}</div>`;
-                    }).join('');
-                    logConsole.scrollTop = logConsole.scrollHeight;
-                }
-
-            } catch (error) {
-                console.error('Status update error:', error);
-            }
-        }
-
-        // Update queue display
-        function updateQueueDisplay(queue, currentIndex) {
-            const queueList = document.getElementById('queueList');
-            const queueStats = document.getElementById('queueStats');
-            const progressBar = document.getElementById('queueProgressBar');
-            
-            // Calculate stats
-            const pending = queue.filter(q => q.status === 'pending').length;
-            const running = queue.filter(q => q.status === 'running').length;
-            const completed = queue.filter(q => q.status === 'completed').length;
-            const failed = queue.filter(q => q.status === 'failed').length;
-            const skipped = queue.filter(q => q.status === 'skipped').length;
-            
-            // Update stats
-            queueStats.innerHTML = `
-                <span class="queue-stat pending">Pending: ${pending}</span>
-                <span class="queue-stat completed">Completed: ${completed}</span>
-                <span class="queue-stat failed">Failed: ${failed}</span>
-                ${skipped > 0 ? `<span class="queue-stat skipped">Skipped: ${skipped}</span>` : ''}
-            `;
-            
-            // Update progress bar
-            const progress = ((completed + failed + skipped) / queue.length) * 100;
-            progressBar.style.width = `${progress}%`;
-            
-            // Update queue list
-            queueList.innerHTML = queue.map((item, index) => {
-                let icon = '○';
-                if (item.status === 'running') icon = '▶';
-                else if (item.status === 'completed') icon = '✓';
-                else if (item.status === 'failed') icon = '✗';
-                else if (item.status === 'skipped') icon = '⊘';
-                
-                return `
-                    <div class="queue-item ${item.status}">
-                        <span class="queue-item-icon">${icon}</span>
-                        <span class="queue-item-info">${item.profile} - Round ${item.round}</span>
-                        <span class="queue-item-status">${item.status}</span>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Add log entry
-        function addLog(message, type = '') {
-            const logConsole = document.getElementById('logConsole');
-            const timestamp = new Date().toLocaleTimeString();
-            logConsole.innerHTML += `<div class="log-entry ${type}">[${timestamp}] ${message}</div>`;
-            logConsole.scrollTop = logConsole.scrollHeight;
-        }
-
-        // Copy logs to clipboard
-        function copyLogs() {
-            const logConsole = document.getElementById('logConsole');
-            const logs = Array.from(logConsole.querySelectorAll('.log-entry'))
-                .map(entry => entry.textContent)
-                .join('\n');
-            
-            navigator.clipboard.writeText(logs).then(() => {
-                const notification = document.getElementById('copyNotification');
-                notification.classList.add('show');
-                setTimeout(() => notification.classList.remove('show'), 2000);
-            });
-        }
-
-        // Clear logs
-        async function clearLogs() {
-            try {
-                await fetch(`${API_URL}/api/clear-logs`, { method: 'POST' });
-            } catch (error) {
-                console.error('Error clearing server logs:', error);
-            }
-            
-            const logConsole = document.getElementById('logConsole');
-            logConsole.innerHTML = '<div class="log-entry info">Logs cleared</div>';
-        }
-    </script>
+    <script src="/static/app.js"></script>
 </body>
 </html>
