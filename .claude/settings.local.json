@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(edge --version:*)",
+      "Bash(msedge:*)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --version)",
+      "Bash(powershell:*)",
+      "Bash(curl:*)",
+      "Bash(pip install:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(python app.py:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(./msedgedriver.exe:*)"
+    ]
+  }
+}

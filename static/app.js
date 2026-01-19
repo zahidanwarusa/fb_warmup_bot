@@ -467,6 +467,8 @@ async function clearLogs() {
 
 // ========== SCHEDULING ==========
 
+let editingScheduleId = null; // Track if we're editing a schedule
+
 async function loadSchedules() {
     try {
         const response = await fetch(`${API_URL}/api/schedules`);
@@ -516,6 +518,7 @@ async function loadSchedules() {
                         </div>
                     </div>
                     <div class="schedule-actions">
+                        <button class="btn-edit btn-small" onclick="editSchedule(${schedule.id})">Edit</button>
                         <button class="btn-edit btn-small" onclick="runScheduleNow(${schedule.id})">Run Now</button>
                         <button class="btn-delete btn-small" onclick="deleteSchedule(${schedule.id})">Delete</button>
                     </div>
@@ -539,14 +542,39 @@ async function populateScheduleProfiles() {
             return;
         }
 
-        container.innerHTML = profiles.map(profile => `
+        // Add "Select All" option
+        const selectAllHTML = `
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; cursor: pointer; background: rgba(79, 172, 254, 0.1); border-radius: 8px; margin-bottom: 8px; border: 1px solid rgba(79, 172, 254, 0.3);">
+                <input type="checkbox" id="selectAllScheduleProfiles" onchange="toggleAllScheduleProfiles()" style="width: auto;">
+                <span style="font-weight: 600; color: #4facfe;">Select All Profiles</span>
+            </label>
+        `;
+
+        const profilesHTML = profiles.map(profile => `
             <label style="display: flex; align-items: center; gap: 10px; padding: 8px; cursor: pointer;">
-                <input type="checkbox" class="schedule-profile-checkbox" value="${profile.name}" style="width: auto;">
+                <input type="checkbox" class="schedule-profile-checkbox" value="${profile.name}" style="width: auto;" onchange="updateScheduleSelectAll()">
                 <span>${profile.name}</span>
             </label>
         `).join('');
+
+        container.innerHTML = selectAllHTML + profilesHTML;
     } catch (error) {
         console.error('Error loading profiles for schedule:', error);
+    }
+}
+
+function toggleAllScheduleProfiles() {
+    const selectAll = document.getElementById('selectAllScheduleProfiles');
+    const checkboxes = document.querySelectorAll('.schedule-profile-checkbox');
+    checkboxes.forEach(cb => cb.checked = selectAll.checked);
+}
+
+function updateScheduleSelectAll() {
+    const checkboxes = document.querySelectorAll('.schedule-profile-checkbox');
+    const selectAll = document.getElementById('selectAllScheduleProfiles');
+
+    if (selectAll && checkboxes.length > 0) {
+        selectAll.checked = Array.from(checkboxes).every(cb => cb.checked);
     }
 }
 
@@ -623,24 +651,38 @@ document.getElementById('addScheduleForm').addEventListener('submit', async (e) 
     }
 
     try {
-        const response = await fetch(`${API_URL}/api/schedules`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(scheduleData)
-        });
+        let response;
+        let successMessage;
+
+        if (editingScheduleId) {
+            // Update existing schedule
+            response = await fetch(`${API_URL}/api/schedules/${editingScheduleId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(scheduleData)
+            });
+            successMessage = `Schedule "${name}" updated successfully!`;
+        } else {
+            // Create new schedule
+            response = await fetch(`${API_URL}/api/schedules`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(scheduleData)
+            });
+            successMessage = `Schedule "${name}" created successfully!`;
+        }
 
         const data = await response.json();
 
         if (response.ok) {
-            document.getElementById('addScheduleForm').reset();
-            document.getElementById('scheduleTime').value = '09:00';
+            resetScheduleForm();
             loadSchedules();
-            alert(`Schedule "${name}" created successfully!`);
+            alert(successMessage);
         } else {
-            alert(data.error || 'Failed to create schedule');
+            alert(data.error || 'Failed to save schedule');
         }
     } catch (error) {
-        console.error('Error creating schedule:', error);
+        console.error('Error saving schedule:', error);
         alert('Failed to connect to server');
     }
 });
@@ -679,6 +721,120 @@ async function deleteSchedule(scheduleId) {
     } catch (error) {
         console.error('Error deleting schedule:', error);
     }
+}
+
+async function editSchedule(scheduleId) {
+    try {
+        const response = await fetch(`${API_URL}/api/schedules/${scheduleId}`);
+        const schedule = await response.json();
+
+        if (!response.ok) {
+            alert('Failed to load schedule');
+            return;
+        }
+
+        // Set editing mode
+        editingScheduleId = scheduleId;
+
+        // Populate form fields
+        document.getElementById('scheduleName').value = schedule.name;
+        document.getElementById('scheduleType').value = schedule.schedule_type;
+        document.getElementById('scheduleLoops').value = schedule.loops;
+        document.getElementById('scheduleDelayValue').value = schedule.loop_delay_value || 0;
+        document.getElementById('scheduleDelayUnit').value = schedule.loop_delay_unit || 'minutes';
+
+        // Update schedule type fields
+        updateScheduleFields();
+
+        // Set time for daily/weekly/once
+        if (schedule.schedule_type === 'daily' || schedule.schedule_type === 'weekly' || schedule.schedule_type === 'once') {
+            document.getElementById('scheduleTime').value = schedule.schedule_time;
+        }
+
+        // Set days for weekly
+        if (schedule.schedule_type === 'weekly') {
+            const dayCheckboxes = document.querySelectorAll('#scheduleDaysGroup input[type="checkbox"]');
+            dayCheckboxes.forEach(cb => {
+                cb.checked = schedule.schedule_days.includes(parseInt(cb.value));
+            });
+        }
+
+        // Set interval
+        if (schedule.schedule_type === 'interval') {
+            document.getElementById('intervalValue').value = schedule.interval_value;
+            document.getElementById('intervalUnit').value = schedule.interval_unit;
+        }
+
+        // Check the profiles
+        const profileCheckboxes = document.querySelectorAll('.schedule-profile-checkbox');
+        profileCheckboxes.forEach(cb => {
+            cb.checked = schedule.profiles.includes(cb.value);
+        });
+
+        // Update select all checkbox
+        updateScheduleSelectAll();
+
+        // Update button text
+        const submitBtn = document.querySelector('#addScheduleForm button[type="submit"]');
+        submitBtn.textContent = 'Update Schedule';
+        submitBtn.classList.remove('btn-primary');
+        submitBtn.classList.add('btn-success');
+
+        // Add cancel button if not exists
+        if (!document.getElementById('cancelEditBtn')) {
+            const cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.id = 'cancelEditBtn';
+            cancelBtn.className = 'btn btn-secondary btn-full';
+            cancelBtn.textContent = 'Cancel Edit';
+            cancelBtn.style.marginTop = '10px';
+            cancelBtn.onclick = resetScheduleForm;
+            submitBtn.parentNode.appendChild(cancelBtn);
+        }
+
+        // Scroll to form
+        document.getElementById('addScheduleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (error) {
+        console.error('Error loading schedule for edit:', error);
+        alert('Failed to load schedule');
+    }
+}
+
+function resetScheduleForm() {
+    editingScheduleId = null;
+
+    // Reset form
+    document.getElementById('addScheduleForm').reset();
+    document.getElementById('scheduleTime').value = '09:00';
+
+    // Uncheck all profile checkboxes
+    const profileCheckboxes = document.querySelectorAll('.schedule-profile-checkbox');
+    profileCheckboxes.forEach(cb => cb.checked = false);
+
+    const selectAllCheckbox = document.getElementById('selectAllScheduleProfiles');
+    if (selectAllCheckbox) {
+        selectAllCheckbox.checked = false;
+    }
+
+    // Uncheck all day checkboxes
+    const dayCheckboxes = document.querySelectorAll('#scheduleDaysGroup input[type="checkbox"]');
+    dayCheckboxes.forEach(cb => cb.checked = false);
+
+    // Reset button text
+    const submitBtn = document.querySelector('#addScheduleForm button[type="submit"]');
+    submitBtn.textContent = 'Create Schedule';
+    submitBtn.classList.remove('btn-success');
+    submitBtn.classList.add('btn-primary');
+
+    // Remove cancel button
+    const cancelBtn = document.getElementById('cancelEditBtn');
+    if (cancelBtn) {
+        cancelBtn.remove();
+    }
+
+    // Reset schedule type fields
+    updateScheduleFields();
 }
 
 async function runScheduleNow(scheduleId) {

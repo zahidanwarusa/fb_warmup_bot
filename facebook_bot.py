@@ -25,6 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import logging
 
 # Configure logging to handle Unicode characters properly
@@ -228,17 +229,30 @@ class FacebookWarmupBot:
         """Setup Microsoft Edge browser with profile"""
         try:
             logger.info("Setting up Microsoft Edge browser...")
-            
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            driver_path = os.path.join(current_dir, "edgedriver_win64", "msedgedriver.exe")
-            
-            if not os.path.exists(driver_path):
-                logger.error(f"Edge driver not found at: {driver_path}")
-                logger.error("Please ensure msedgedriver.exe is in the edgedriver_win64 folder")
-                return False
-            
-            logger.info(f"Using Edge driver from: {driver_path}")
-            
+
+            # Try to use webdriver-manager first, fallback to local driver
+            try:
+                logger.info("Auto-detecting and installing correct EdgeDriver version...")
+                driver_path = EdgeChromiumDriverManager().install()
+                logger.info(f"Using Edge driver from: {driver_path}")
+            except Exception as wdm_error:
+                logger.warning(f"WebDriver Manager failed: {wdm_error}")
+                logger.info("Falling back to local EdgeDriver...")
+
+                # Fallback to local driver
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                driver_path = os.path.join(current_dir, "edgedriver_win64", "msedgedriver.exe")
+
+                if not os.path.exists(driver_path):
+                    logger.error(f"Edge driver not found at: {driver_path}")
+                    logger.error("Please download EdgeDriver manually:")
+                    logger.error("1. Visit: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/")
+                    logger.error("2. Download EdgeDriver for your Edge version")
+                    logger.error("3. Extract msedgedriver.exe to edgedriver_win64/ folder")
+                    return False
+
+                logger.info(f"Using local Edge driver from: {driver_path}")
+
             edge_options = EdgeOptions()
             
             if self.profile_path:

@@ -12,12 +12,6 @@
     "created": "2025-11-25T07:04:08.828642"
   },
   {
-    "id": 4,
-    "name": "JessicaAdams",
-    "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 4",
-    "created": "2025-11-25T07:16:53.869853"
-  },
-  {
     "id": 6,
     "name": "patricia_weaver",
     "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 5",
@@ -220,5 +214,23 @@
     "name": "JordynJordyn",
     "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 40",
     "created": "2025-12-25T19:22:26.324192"
+  },
+  {
+    "id": 41,
+    "name": "JessicaAdams",
+    "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 4",
+    "created": "2026-01-02T19:58:07.460485"
+  },
+  {
+    "id": 42,
+    "name": "MaxwellBoone",
+    "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 54",
+    "created": "2026-01-06T00:25:18.702566"
+  },
+  {
+    "id": 43,
+    "name": "FannieGayCLimon",
+    "path": "C:\\Users\\ABC\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 51",
+    "created": "2026-01-06T00:26:25.345075"
   }
 ]
